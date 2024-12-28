@@ -1,0 +1,6 @@
+{
+  "name": "analytics",
+  "version": "1.0.1",
+  "description": "Integrates Posthog to provide analytics functionalities",
+  "dependencies": ["posthog-js"]
+}

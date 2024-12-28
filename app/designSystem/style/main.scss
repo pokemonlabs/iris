@@ -1,0 +1,121 @@
+@use './landing.scss';
+
+body {
+  display: block;
+  margin: 0px;
+}
+
+.ant-app,
+body {
+  height: var(--100vh);
+  overflow-x: hidden;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.ant-breadcrumb a {
+  text-decoration: none;
+}
+.ant-dropdown-menu-title-content a {
+  text-decoration: none;
+}
+
+.ant-layout-sider-children {
+  width: 100%;
+}
+.ant-layout-sider-children {
+  display: flex;
+  flex-direction: column;
+}
+.ant-menu-item-selected::after,
+.ant-menu-item::after,
+.ant-menu-item-active::after,
+.ant-menu-horizontal,
+.ant-menu-submenu,
+.ant-menu-submenu::after {
+  border-bottom: none !important;
+}
+.ant-typography a,
+.ant-btn-link > span {
+  text-underline-offset: 0.2em;
+  text-decoration: underline;
+}
+.ant-typography a:hover {
+  text-underline-offset: 0.2em;
+  text-decoration: underline;
+}
+.ant-menu-item-selected {
+  font-weight: 500;
+}
+
+.ant-form {
+  .ant-form-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .ant-form-item {
+    font-weight: 500;
+  }
+}
+
+.ant-btn-background-ghost {
+  &:active,
+  &:hover {
+    border-color: transparent;
+  }
+}
+
+.css-var-Rcq.ant-typography {
+  --ant-typography-title-margin-top: 0em;
+  --ant-typography-title-margin-bottom: 0em;
+}
+
+.organization-select__menu {
+  li {
+    cursor: default !important;
+  }
+}
+
+/* Line awesome icons size */
+.las,
+.lab,
+.las {
+  font-size: 1em;
+}
+
+.las,
+.lab,
+.las {
+  font-size: inherit; /* Inherit from parent class if a class is applied */
+}
+
+.scrollbar--hidden {
+  &::-webkit-scrollbar {
+    display: none; // For WebKit browsers (Chrome, Safari)
+  }
+  scrollbar-width: none; // For Firefox
+}
+
+.scrollbar--minimalist {
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
+  ::-webkit-scrollbar-thumb:active {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+}

@@ -1,0 +1,237 @@
+enum UserStatus {
+    INVITED
+    VERIFIED
+}
+
+model User {
+    id                   String             @id @default(uuid())
+    name                 String?
+    email                String?            @unique
+    pictureUrl           String?            @default('https://i.imgur.com/ZdJSK3Y.jpeg')
+    tokenInvitation      String?
+
+    stripeCustomerId     String?
+
+    status               UserStatus         @default(VERIFIED)
+
+    // this is the role of the user for the application
+    globalRole           String             @default('USER')
+    password             String?            @password @omit
+    createdAt            DateTime           @default(now())
+    updatedAt            DateTime           @updatedAt @default(now())
+
+    organizationRoles    OrganizationRole[]
+
+    testsAsCreatedBy     Test[]             @relation("createdBy")
+    testRunsAsExecutedBy TestRun[]          @relation("executedBy")
+    testShares           TestShare[]        @relation("user")
+
+    @@auth()
+    @@allow("all", auth().id == this.id)
+    @@allow('all', auth().globalRole == 'ADMIN')
+
+    //we only allow that user to register if they don't create an admin role
+    @@allow("create", globalRole != 'ADMIN')
+    @@allow("read", true)
+}
+
+model Project {
+
+    id             String        @id @default(uuid())
+    name           String
+    description    String?
+
+    organizationId String
+    organization   Organization? @relation(fields: [organizationId], references: [id], name: "organization")
+
+    tests          Test[]        @relation("project")
+    createdAt      DateTime      @default(now())
+    updatedAt      DateTime      @updatedAt @default(now())
+
+    // New fields for storing cookie, session, and localStorage data
+    cookies        Json?         // JSON field for storing cookies
+    session        Json?         // JSON field for storing session data
+    localStorage   Json?         // JSON field for storing localStorage data
+
+    @@allow("all", true)
+}
+
+model Test {
+
+    id                   String      @id @default(uuid())
+    name                 String
+    description          String?
+    url                  String?
+    naturalLanguageInput String?
+    status               String
+    isActive             Boolean     @default(true)
+
+    projectId            String
+    project              Project?    @relation(fields: [projectId], references: [id], name: "project")
+    createdById          String
+    createdBy            User?       @relation(fields: [createdById], references: [id], name: "createdBy")
+
+    testRuns             TestRun[]   @relation("test")
+    testShares           TestShare[] @relation("test")
+    createdAt            DateTime    @default(now())
+    updatedAt            DateTime    @updatedAt @default(now())
+    @@allow("all", true)
+}
+
+model TestRun {
+
+    id           String     @id @default(uuid())
+    status       String
+    errorLog     String?
+    reportUrl    String?
+
+    testId       String
+    test         Test?      @relation(fields: [testId], references: [id], name: "test", onDelete: Cascade)
+    executedById String
+    executedBy   User?      @relation(fields: [executedById], references: [id], name: "executedBy")
+
+    testSteps    TestStep[] @relation("testRun")
+    createdAt    DateTime   @default(now())
+    updatedAt    DateTime   @updatedAt @default(now())
+    @@allow("all", true)
+}
+
+model TestStep {
+
+    id            String   @id @default(uuid())
+    order         Float
+    action        String
+    status        String
+    screenshotUrl String?
+
+    testRunId     String
+    testRun       TestRun? @relation(fields: [testRunId], references: [id], name: "testRun", onDelete: Cascade)
+
+    createdAt     DateTime @default(now())
+    updatedAt     DateTime @updatedAt @default(now())
+    @@allow("all", true)
+}
+
+model TestShare {
+
+    id         String   @id @default(uuid())
+    permission String
+
+    testId     String
+    test       Test?    @relation(fields: [testId], references: [id], name: "test", onDelete: Cascade)
+    userId     String
+    user       User?    @relation(fields: [userId], references: [id], name: "user")
+
+    createdAt  DateTime @default(now())
+    updatedAt  DateTime @updatedAt @default(now())
+    @@allow("all", true)
+}
+
+model Organization {
+    id               String             @id @default(uuid())
+    name             String
+    pictureUrl       String?            @default('https://i.imgur.com/BgkFiid.jpeg')
+
+    stripeCustomerId String?
+
+    createdAt        DateTime           @default(now())
+    updatedAt        DateTime           @updatedAt @default(now())
+    roles            OrganizationRole[]
+
+    projects         Project[]          @relation("organization")
+    agentCredentials Agent[]            @relation("organization") // Added this line1
+
+
+    @@allow('all', auth().globalRole == 'ADMIN')
+    @@allow('all', roles?[user == auth() && name == 'owner'])
+    @@allow('read', roles?[user == auth()])
+
+    integration      Integration[]
+}
+
+model OrganizationRole {
+    id             String       @id @default(uuid())
+    name           String
+    createdAt      DateTime     @default(now())
+    updatedAt      DateTime     @updatedAt @default(now())
+
+    userId         String       @default(auth().id)
+    user           User         @relation(fields: [userId], references: [id])
+    organizationId String
+    organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+    @@allow('all', auth().globalRole == 'ADMIN')
+    @@allow('all', organization.roles?[user == auth() && name == 'owner'])
+    @@allow('create', organization.roles?[user == auth()] && name != 'owner')
+    @@allow('read', organization.roles?[user == auth()])
+    @@allow('delete', auth() == user)
+}
+
+model Agent {
+    id                 String       @id @default(uuid())
+    provider           String
+    modelType          String
+    
+    // Common fields
+    numAgents          Int          @default(0)
+    isActive           Boolean      @default(true)
+
+    // Provider-specific credentials - only one set will be populated based on provider
+    // Anthropic
+    anthropicApiKey    String?
+
+    // AWS Bedrock
+    awsAccessKeyId     String?
+    awsSecretAccessKey String?
+    awsSessionToken    String?
+    awsRegion          String?
+
+    // Direct API - future extensibility
+    apiEndpoint        String?
+    apiKey             String?      
+
+    // Relations
+    organizationId     String
+    organization       Organization @relation(fields: [organizationId], references: [id], name: "organization")
+
+    // Timestamps
+    createdAt          DateTime     @default(now())
+    updatedAt          DateTime     @updatedAt @default(now())
+
+    // Access rules
+    @@allow('create', auth().globalRole == 'ADMIN' || auth().organizationRoles?[organization == this.organization && name == 'owner'])
+    @@allow('update', auth().globalRole == 'ADMIN' || auth().organizationRoles?[organization == this.organization && name == 'owner'])
+    @@allow('delete', auth().globalRole == 'ADMIN' || auth().organizationRoles?[organization == this.organization && name == 'owner'])
+    @@allow('read', true)
+
+    // @@validate(
+    //     (provider == 'ANTHROPIC' && anthropicApiKey != null && awsAccessKeyId == null && awsSecretAccessKey == null) ||
+    //     (provider == 'BEDROCK' && awsAccessKeyId != null && awsSecretAccessKey != null && awsRegion != null && anthropicApiKey == null) ||
+    //     (provider == 'DIRECT_API' && apiEndpoint != null && apiKey != null)
+    // , "Provider credentials must match the selected provider type")
+}
+
+
+enum IntegrationType {
+    jira
+    linear
+    slack
+    discord
+}
+
+
+model Integration {
+    id             String          @id @default(uuid())
+    type           IntegrationType @map("integration_type")
+    name           String
+    config         Json
+    createdAt      DateTime        @default(now())
+    updatedAt      DateTime        @updatedAt @default(now())
+    organizationId String
+    organization   Organization    @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+
+    @@allow('all', organization.roles?[user == auth()])
+    @@index([organizationId])
+    @@index([type])
+}

@@ -1,0 +1,6 @@
+{
+  "name": "ai",
+  "version": "1.0.1",
+  "description": "Integrates with OpenAI to provide various AI-driven functionalities",
+  "dependencies": ["openai"]
+}

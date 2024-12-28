@@ -1,0 +1,14 @@
+{
+  "type": "remix",
+  "version": "1.0.0",
+  "commands": {
+    "build": "pnpm run crud:sync && pnpm run build",
+    "build-after": "pnpm run crud:sync",
+    "start": "pnpm run database:sync && pnpm run start"
+  },
+  "commandsWorkspace": {
+    "init": "pnpm install && pnpm run crud:sync && pnpm run database:sync:dev && pnpm run database:seed",
+    "dev": "pnpm run dev",
+    "syncModels": "pnpm run crud:sync && pnpm run database:sync:dev"
+  }
+}

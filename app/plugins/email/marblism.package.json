@@ -1,0 +1,7 @@
+{
+  "name": "email",
+  "version": "1.0.2",
+  "description": "Integrates with Mailjet to provide email functionalities",
+  "dependencies": ["nodemailer", "node-mailjet"],
+  "devDependencies": ["@types/nodemailer"]
+}

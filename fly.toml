@@ -1,0 +1,25 @@
+# fly.toml app configuration file generated for irisyc on 2024-12-19T11:49:41+05:30
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'irisyc'
+primary_region = 'nrt'
+
+[build]
+
+# [deploy]
+#   release_command = 'npx prisma migrate deploy'
+
+[http_service]
+  internal_port = 8099
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1

@@ -1,0 +1,6 @@
+{
+  "name": "upload",
+  "version": "1.0.2",
+  "description": "Integrates with AWS S3 to provide file storage and upload functionalities",
+  "dependencies": ["@aws-sdk/client-s3", "@aws-sdk/s3-request-presigner"]
+}

@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.anticon {
+  display: inline-flex !important;
+  vertical-align: -0.125em !important;
+  align-items: center;
+}
+
+.mask-stripes {
+  -webkit-mask-image: url('https://i.imgur.com/xYBtnf5.png');
+  -webkit-mask-position: center center;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-image: url('https://i.imgur.com/xYBtnf5.png');
+  mask-position: center center;
+  mask-repeat: no-repeat;
+  mask-size: contain;
+}

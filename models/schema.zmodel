@@ -1,0 +1,27 @@
+//
+// DO NOT MODIFY THIS FILE                                                                  
+// EDIT models.zmodel to change your data model 
+//
+
+import "./models.zmodel"
+
+datasource db {
+    provider = "postgresql"
+    url      = env("SERVER_DATABASE_URL")
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+plugin prisma {
+    provider = '@core/prisma'
+    output = "./../prisma/schema.prisma"
+}
+
+plugin trpc {
+    provider = '@zenstackhq/trpc'
+    output = '../app/core/.iris/zenstack'
+    generateClientHelpers = ['react']
+    generateModelActions = ['create', 'update', 'delete','count', 'findMany', 'findFirst', 'findUnique', 'createMany', 'updateMany', 'deleteMany']
+}

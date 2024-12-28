@@ -1,0 +1,6 @@
+{
+  "name": "image-optimize",
+  "version": "1.0.9",
+  "description": "A plugin that converts an uploaded image to an optimized .webp format, ideal for displaying in web applications.",
+  "dependencies": ["sharp"]
+}

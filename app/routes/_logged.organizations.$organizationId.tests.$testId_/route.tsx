@@ -201,7 +201,7 @@ export default function TestDetailsPage() {
                     <Button
                       icon={<EditOutlined />}
                       onClick={() =>
-                        navigate(`/organizations/$/tests/$/edit`)
+                        navigate(`/organizations/${organizationId}/tests/${testId}/edit`)
                       }
                     />
                   </Tooltip>
@@ -209,7 +209,7 @@ export default function TestDetailsPage() {
                     <Button
                       icon={<EyeOutlined />}
                       onClick={() =>
-                        navigate(`/organizations/$/tests/$/results`)
+                        navigate(`/organizations/${organizationId}/tests/${testId}/results`)
                       }
                     />
                   </Tooltip>

@@ -1,49 +1,59 @@
 import { PageLayout } from '@/designSystem';
 import { useNavigate } from "@remix-run/react";
 import { Button, Card, Col, Row, Space, Typography } from 'antd';
-import { useEffect, useState } from 'react'; // Import useEffect
+import { useEffect, useState } from 'react'; // Import useState
 import Joyride from "react-joyride";
-const { Title, Paragraph } = Typography
+const { Title, Paragraph } = Typography;
 
 export default function WelcomePage() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const [run, setRun] = useState(false); // Toggle for running the tour
+  const [run, setRun] = useState(true); // Toggle for running the tour
   const steps = [
     {
       target: "#leftbar-welcome", // CSS selector for the element to highlight
       content: "Welcome to the platform! This is the first step to getting started.",
+      disableBeacon: true, // Disable the beacon for this step
     },
     {
       target: "#leftbar-org-home", // CSS selector for the element to highlight
       content: "This is the Home tab, where you can find an overview of your organization.",
+      disableBeacon: true, // Disable the beacon for this step
     },
     {
       target: "#leftbar-org-projects", // CSS selector for the element to highlight
       content: "Projects help you organize all test cases for your product. Think of them as a store for your tests.",
+      disableBeacon: true, // Disable the beacon for this step
     },
     {
       target: "#leftbar-org-pricing", // CSS selector for the element to highlight
       content: "This is the Pricing tab, where you can manage your subscription and costs.",
+      disableBeacon: true, // Disable the beacon for this step
     },
     {
       target: "#leftbar-org-integrations", // CSS selector for the element to highlight
       content: "Integrate with various apps for task tracking and other functionalities here.",
+      disableBeacon: true, // Disable the beacon for this step
     },
     {
       target: "#leftbar-org-agent", // CSS selector for the element to highlight
       content: "Agents perform actions for you. Create one to get started with automating tasks.",
+      disableBeacon: true, // Disable the beacon for this step
     },
     {
       target: "#leftbar-org-vnc", // CSS selector for the element to highlight
       content: "This is the VNC tab, where you can monitor what your agents are doing in real-time.",
+      disableBeacon: true, // Disable the beacon for this step
     }
   ];
 
-  // Automatically start the tour when the component mounts
   useEffect(() => {
-    setRun(true);
-  }, []);
+    setRun(false); // Set run to true to start the tour
+  }, [])
+
+  const handleStartTour = () => {
+    setRun(true); // Set run to true to start the tour
+  };
 
   return (
     <PageLayout layout="full-width">
@@ -52,8 +62,9 @@ export default function WelcomePage() {
         run={run} // Controls whether the tour is running
         continuous // Automatically moves to the next step
         scrollToFirstStep // Scrolls to the first step if not in view
-        showProgress // Shows step progress
-        showSkipButton // Displays a skip button
+        showProgress={true} // Hide step progress
+        showSkipButton={true} // Hide the skip button
+        disableOverlayClose // Prevent closing the tour by clicking outside
       />
 
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '24px' }}>
@@ -195,7 +206,14 @@ export default function WelcomePage() {
             </Card>
           </Col>
         </Row>
+
+        {/* Add a button to start the tour */}
+        <div style={{ textAlign: 'center', marginTop: 24 }}>
+          <Button type="primary" onClick={handleStartTour}>
+            Start Tour
+          </Button>
+        </div>
       </div>
     </PageLayout>
-  )
+  );
 }

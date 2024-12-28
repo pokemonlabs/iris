@@ -8,7 +8,7 @@ const { Title, Paragraph } = Typography;
 export default function WelcomePage() {
   const navigate = useNavigate();
 
-  const [run, setRun] = useState(true); // Toggle for running the tour
+  const [run, setRun] = useState(false); // Toggle for running the tour
   const steps = [
     {
       target: "#leftbar-welcome", // CSS selector for the element to highlight
@@ -48,8 +48,14 @@ export default function WelcomePage() {
   ];
 
   useEffect(() => {
-    setRun(false); // Set run to true to start the tour
-  }, [])
+    // Check if the user has visited before
+    const hasVisitedBefore = localStorage.getItem('hasVisitedBefore');
+    console.log({ hasVisitedBefore })
+    if (!hasVisitedBefore) {
+      setRun(true); // Start the tour if it's the first visit
+      localStorage.setItem('hasVisitedBefore', 'true'); // Mark as visited
+    }
+  }, []);
 
   const handleStartTour = () => {
     setRun(true); // Set run to true to start the tour

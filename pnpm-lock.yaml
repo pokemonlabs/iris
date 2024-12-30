@@ -20,6 +20,9 @@ importers:
       '@aws-sdk/s3-request-presigner':
         specifier: ^3.657.0
         version: 3.705.0
+      '@nangohq/frontend':
+        specifier: ^0.48.1
+        version: 0.48.1
       '@nangohq/node':
         specifier: ^0.48.1
         version: 0.48.1
@@ -1373,6 +1376,9 @@ packages:
 
   '@mdx-js/mdx@2.3.0':
     resolution: {integrity: sha512-jLuwRlz8DQfQNiUCJR50Y09CGPq3fLtmtUQfVrj79E0JWu3dvsVcxVIcfhR5h0iXu+/z++zDrYeiJqifRynJkA==}
+
+  '@nangohq/frontend@0.48.1':
+    resolution: {integrity: sha512-G4OVE7xEKZFoxQ4on/NDdVRExl+hbR0O7J+RyFJzZkLvrP17TR0Tg63ZA+IPvX6IFWn24F+cpgLrutN4nF1DGg==}
 
   '@nangohq/node@0.48.1':
     resolution: {integrity: sha512-67rCo0mgHkvyzA3n7EQFJBXwzomDspUFnm9n8zXWXojqbXLKz4T69gnfuPhBzBK1fCUlSve8HBnrXRc1ZSAfmw==}
@@ -7207,6 +7213,8 @@ snapshots:
       vfile: 5.3.7
     transitivePeerDependencies:
       - supports-color
+
+  '@nangohq/frontend@0.48.1': {}
 
   '@nangohq/node@0.48.1':
     dependencies:

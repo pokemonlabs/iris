@@ -19,6 +19,7 @@ export default function IntegrationsPage() {
 
   const { mutateAsync: nangoProxy } = Api.nango.proxy.useMutation();
 
+  // GitHub Integration
   const authenticateGithub = async () => {
     try {
       await nango.auth('github-app-oauth', user?.id);
@@ -48,9 +49,40 @@ export default function IntegrationsPage() {
     }
   };
 
+  // Slack Integration
+  const authenticateSlack = async () => {
+    try {
+      await nango.auth('slack', user?.id);
+      message.success('Slack integration linked successfully.');
+      refetch();
+    } catch (error) {
+      message.error('Error linking Slack integration');
+      console.error(error);
+    }
+  };
+
+  const fetchSlackData = async () => {
+    const config = {
+      method: 'GET',
+      endpoint: 'https://slack.com/api/team.info',
+      providerConfigKey: 'slack',
+      connectionId: user?.id,
+    };
+
+    try {
+      const { data } = await nangoProxy(config);
+      message.success('Slack data fetched successfully');
+      console.log(data);
+    } catch (error) {
+      message.error('Failed to fetch Slack data');
+      console.error(error);
+    }
+  };
+
   return (
     <PageLayout layout="full-width">
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '24px' }}>
+        {/* GitHub Section */}
         <Title level={2}>GitHub Integration</Title>
         <Paragraph>Connect your GitHub account to access repositories and other GitHub features.</Paragraph>
 
@@ -69,6 +101,27 @@ export default function IntegrationsPage() {
             disabled={!integrations?.some(i => i.type === 'github')}
           >
             Fetch GitHub Data
+          </Button>
+        </div>
+
+        {/* Slack Section */}
+        <Title level={2}>Slack Integration</Title>
+        <Paragraph>Connect your Slack workspace to access team information and communication features.</Paragraph>
+
+        <div style={{ marginBottom: '16px' }}>
+          <Button
+            onClick={authenticateSlack}
+            loading={isLoading}
+          >
+            Connect to Slack
+          </Button>
+
+          <Button
+            style={{ marginLeft: '8px' }}
+            onClick={fetchSlackData}
+            disabled={!integrations?.some(i => i.type === 'slack')}
+          >
+            Fetch Slack Data
           </Button>
         </div>
       </div>

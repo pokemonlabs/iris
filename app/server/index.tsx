@@ -5,6 +5,7 @@ import { Trpc } from '@/core/trpc/base'
 import { AiServer } from '@/plugins/ai/server'
 import { EmailServer } from '@/plugins/email/server'
 import { UploadServer } from '@/plugins/upload/server'
+import { NangoServer } from '~/plugins/nango/server'
 
 import { PaymentServer } from '~/plugins/payment/server'
 import { RabbitMQServer } from '~/plugins/rabbitmq'
@@ -22,6 +23,7 @@ export const appRouter = Trpc.mergeRouters(
 
     billing: PaymentServer.trpcRouter,
     rabbitmq: RabbitMQServer.trpcRouter,
+    nango: NangoServer.trpcRouter,
   }),
 )
 

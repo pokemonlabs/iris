@@ -20,6 +20,9 @@ importers:
       '@aws-sdk/s3-request-presigner':
         specifier: ^3.657.0
         version: 3.705.0
+      '@nangohq/node':
+        specifier: ^0.48.1
+        version: 0.48.1
       '@prisma/client':
         specifier: ^5.19.1
         version: 5.22.0(prisma@5.22.0)
@@ -1370,6 +1373,10 @@ packages:
 
   '@mdx-js/mdx@2.3.0':
     resolution: {integrity: sha512-jLuwRlz8DQfQNiUCJR50Y09CGPq3fLtmtUQfVrj79E0JWu3dvsVcxVIcfhR5h0iXu+/z++zDrYeiJqifRynJkA==}
+
+  '@nangohq/node@0.48.1':
+    resolution: {integrity: sha512-67rCo0mgHkvyzA3n7EQFJBXwzomDspUFnm9n8zXWXojqbXLKz4T69gnfuPhBzBK1fCUlSve8HBnrXRc1ZSAfmw==}
+    engines: {node: '>=18.0'}
 
   '@noble/hashes@1.6.1':
     resolution: {integrity: sha512-pq5D8h10hHBjyqX+cfBm0i8JUXJ0UhczFc4r74zbuT9XgewFo2E3J1cOaGtdZynILNmQ685YWGzGE1Zv6io50w==}
@@ -7200,6 +7207,12 @@ snapshots:
       vfile: 5.3.7
     transitivePeerDependencies:
       - supports-color
+
+  '@nangohq/node@0.48.1':
+    dependencies:
+      axios: 1.7.8
+    transitivePeerDependencies:
+      - debug
 
   '@noble/hashes@1.6.1': {}
 

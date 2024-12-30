@@ -29,10 +29,10 @@ export default function JobsPage() {
   };
 
   const vncSessions = {
-    session1: 'http://176.34.156.226:6081/vnc.html?&resize=scale&autoconnect=1&view_only=1&reconnect=1&reconnect_delay=2000',
-    session2: 'http://176.34.156.226:6082/vnc.html?&resize=scale&autoconnect=1&view_only=1&reconnect=1&reconnect_delay=2000',
-    session3: 'http://176.34.156.226:6083/vnc.html?&resize=scale&autoconnect=1&view_only=1&reconnect=1&reconnect_delay=2000',
-    session4: 'http://176.34.156.226:6084/vnc.html?&resize=scale&autoconnect=1&view_only=1&reconnect=1&reconnect_delay=2000',
+    session1: 'https://workers.tryiris.dev/mewtwo1/vnc.html?&resize=scale&autoconnect=1&view_only=1&reconnect=1&reconnect_delay=2000',
+    session2: 'https://workers.tryiris.dev/mewtwo2/vnc.html?&resize=scale&autoconnect=1&view_only=1&reconnect=1&reconnect_delay=2000',
+    session3: 'https://workers.tryiris.dev/mewtwo3/vnc.html?&resize=scale&autoconnect=1&view_only=1&reconnect=1&reconnect_delay=2000',
+    session4: 'https://workers.tryiris.dev/mewtwo4/vnc.html?&resize=scale&autoconnect=1&view_only=1&reconnect=1&reconnect_delay=2000',
     // Add more sessions as needed
   };
 

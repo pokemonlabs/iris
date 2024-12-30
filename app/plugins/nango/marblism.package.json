@@ -1,0 +1,6 @@
+{
+  "name": "nango",
+  "version": "1.0.1",
+  "description": "Integrates third party apps in your app",
+  "dependencies": ["@nangohq/frontend", "@nangohq/node"]
+}

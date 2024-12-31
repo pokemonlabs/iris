@@ -1,8 +1,8 @@
 import { useUserContext } from '@/core/context';
 import { Api } from '@/core/trpc';
 import { PageLayout } from '@/designSystem';
-import { GithubOutlined } from '@ant-design/icons';
-import { Button, Typography, message } from 'antd';
+import { GithubOutlined, LineChartOutlined, SlackOutlined } from '@ant-design/icons';
+import { Button, Card, Col, message, Row, Typography } from 'antd';
 import { useNango } from '~/plugins/nango/client';
 
 const { Title, Paragraph } = Typography;
@@ -18,6 +18,33 @@ export default function IntegrationsPage() {
   } = Api.integration.findMany.useQuery();
 
   const { mutateAsync: nangoProxy } = Api.nango.proxy.useMutation();
+
+  // Helper for showing integration buttons
+  const IntegrationCard = ({ title, description, onAuthenticate, onFetch, icon, disabled }) => (
+    <Card style={{ marginBottom: '24px' }}>
+      <Row gutter={[16, 16]} align="middle">
+        <Col style={{ fontSize: '24px' }}>{icon}</Col>
+        <Col flex="auto">
+          <Title level={3}>{title}</Title>
+          <Paragraph>{description}</Paragraph>
+          <Button
+            type="primary"
+            onClick={onAuthenticate}
+            loading={isLoading}
+          >
+            Connect
+          </Button>
+          <Button
+            style={{ marginLeft: '8px' }}
+            onClick={onFetch}
+            disabled={disabled}
+          >
+            Fetch Data
+          </Button>
+        </Col>
+      </Row>
+    </Card>
+  );
 
   // GitHub Integration
   const authenticateGithub = async () => {
@@ -79,51 +106,66 @@ export default function IntegrationsPage() {
     }
   };
 
+  // Linear Integration
+  const authenticateLinear = async () => {
+    try {
+      await nango.auth('linear', user?.id);
+      message.success('Linear integration linked successfully.');
+      refetch();
+    } catch (error) {
+      message.error('Error linking Linear integration');
+      console.error(error);
+    }
+  };
+
+  const fetchLinearData = async () => {
+    const config = {
+      method: 'GET',
+      endpoint: 'https://api.linear.app/graphql',
+      providerConfigKey: 'linear',
+      connectionId: user?.id,
+    };
+
+    try {
+      const { data } = await nangoProxy(config);
+      message.success('Linear data fetched successfully');
+      console.log(data);
+    } catch (error) {
+      message.error('Failed to fetch Linear data');
+      console.error(error);
+    }
+  };
+
   return (
     <PageLayout layout="full-width">
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '24px' }}>
-        {/* GitHub Section */}
-        <Title level={2}>GitHub Integration</Title>
-        <Paragraph>Connect your GitHub account to access repositories and other GitHub features.</Paragraph>
-
-        <div style={{ marginBottom: '16px' }}>
-          <Button
-            icon={<GithubOutlined />}
-            onClick={authenticateGithub}
-            loading={isLoading}
-          >
-            Connect to GitHub
-          </Button>
-
-          <Button
-            style={{ marginLeft: '8px' }}
-            onClick={fetchGithubData}
-            disabled={!integrations?.some(i => i.type === 'github')}
-          >
-            Fetch GitHub Data
-          </Button>
-        </div>
-
-        {/* Slack Section */}
-        <Title level={2}>Slack Integration</Title>
-        <Paragraph>Connect your Slack workspace to access team information and communication features.</Paragraph>
-
-        <div style={{ marginBottom: '16px' }}>
-          <Button
-            onClick={authenticateSlack}
-            loading={isLoading}
-          >
-            Connect to Slack
-          </Button>
-
-          <Button
-            style={{ marginLeft: '8px' }}
-            onClick={fetchSlackData}
-            disabled={!integrations?.some(i => i.type === 'slack')}
-          >
-            Fetch Slack Data
-          </Button>
-        </div>
+        <Title level={2} style={{ textAlign: 'center', marginBottom: '24px' }}>
+          Integrations
+        </Title>
+        <IntegrationCard
+          title="GitHub Integration"
+          description="Connect your GitHub account to access repositories and other GitHub features."
+          onAuthenticate={authenticateGithub}
+          onFetch={fetchGithubData}
+          icon={<GithubOutlined />}
+          disabled={!integrations?.some(i => i.type === 'github')}
+        />
+        <IntegrationCard
+          title="Slack Integration"
+          description="Connect your Slack workspace to access team information and communication features."
+          onAuthenticate={authenticateSlack}
+          onFetch={fetchSlackData}
+          icon={<SlackOutlined />}
+          disabled={!integrations?.some(i => i.type === 'slack')}
+        />
+        <IntegrationCard
+          title="Linear Integration"
+          description="Connect your Linear account to manage issues and project workflows."
+          onAuthenticate={authenticateLinear}
+          onFetch={fetchLinearData}
+          icon={<LineChartOutlined />}
+          disabled={!integrations?.some(i => i.type === 'linear')}
+        />
       </div>
     </PageLayout>
   );

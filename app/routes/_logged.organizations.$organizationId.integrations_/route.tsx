@@ -1,7 +1,7 @@
 import { useUserContext } from '@/core/context';
 import { Api } from '@/core/trpc';
 import { PageLayout } from '@/designSystem';
-import { GithubOutlined, LineChartOutlined, SlackOutlined } from '@ant-design/icons';
+import { DiscordOutlined, GithubOutlined, LineChartOutlined, SlackOutlined } from '@ant-design/icons';
 import { Button, Card, Col, message, Row, Typography } from 'antd';
 import { useNango } from '~/plugins/nango/client';
 
@@ -136,6 +136,36 @@ export default function IntegrationsPage() {
     }
   };
 
+  // Discord Integration
+  const authenticateDiscord = async () => {
+    try {
+      await nango.auth('discord', user?.id);
+      message.success('Discord integration linked successfully.');
+      refetch();
+    } catch (error) {
+      message.error('Error linking Discord integration');
+      console.error(error);
+    }
+  };
+
+  const fetchDiscordData = async () => {
+    const config = {
+      method: 'GET',
+      endpoint: 'https://discord.com/api/users/@me',
+      providerConfigKey: 'discord',
+      connectionId: user?.id,
+    };
+
+    try {
+      const { data } = await nangoProxy(config);
+      message.success('Discord data fetched successfully');
+      console.log(data);
+    } catch (error) {
+      message.error('Failed to fetch Discord data');
+      console.error(error);
+    }
+  };
+
   return (
     <PageLayout layout="full-width">
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '24px' }}>
@@ -165,6 +195,14 @@ export default function IntegrationsPage() {
           onFetch={fetchLinearData}
           icon={<LineChartOutlined />}
           disabled={!integrations?.some(i => i.type === 'linear')}
+        />
+        <IntegrationCard
+          title="Discord Integration"
+          description="Connect your Discord account to access user information and communication features."
+          onAuthenticate={authenticateDiscord}
+          onFetch={fetchDiscordData}
+          icon={<DiscordOutlined />}
+          disabled={!integrations?.some(i => i.type === 'discord')}
         />
       </div>
     </PageLayout>

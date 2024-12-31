@@ -217,6 +217,7 @@ enum IntegrationType {
     linear
     slack
     discord
+    github
 }
 
 

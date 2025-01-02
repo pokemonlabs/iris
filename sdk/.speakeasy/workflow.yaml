@@ -1,0 +1,16 @@
+workflowVersion: 1.0.0
+speakeasyVersion: latest
+sources:
+    My awesome API:
+        inputs:
+            - location: ../models/openapi.yaml
+        registry:
+            location: registry.speakeasyapi.dev/tryiris/spec/my-awesome-api
+targets:
+    tryiris:
+        target: typescript
+        source: My awesome API
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/tryiris/spec/my-awesome-api-typescript-code-samples
+            blocking: false

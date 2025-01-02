@@ -1,9 +1,9 @@
 import { PageLayout } from '@/designSystem';
 import { useNavigate } from "@remix-run/react";
-import { Button, Card, Col, Row, Space, Typography } from 'antd';
-import { useEffect, useState } from 'react'; // Import useState
-import Joyride from "react-joyride";
-const { Title, Paragraph } = Typography;
+import { Button, Collapse } from 'antd';
+import { useEffect, useState } from 'react';
+
+const { Panel } = Collapse;
 
 export default function WelcomePage() {
   const navigate = useNavigate();
@@ -11,210 +11,136 @@ export default function WelcomePage() {
   const [run, setRun] = useState(false); // Toggle for running the tour
   const steps = [
     {
-      target: "#leftbar-welcome", // CSS selector for the element to highlight
+      target: "#leftbar-welcome",
       content: "Welcome to the platform! This is the first step to getting started.",
-      disableBeacon: true, // Disable the beacon for this step
+      disableBeacon: true,
     },
     {
-      target: "#leftbar-org-home", // CSS selector for the element to highlight
+      target: "#leftbar-org-home",
       content: "This is the Home tab, where you can find an overview of your organization.",
-      disableBeacon: true, // Disable the beacon for this step
+      disableBeacon: true,
     },
     {
-      target: "#leftbar-org-projects", // CSS selector for the element to highlight
+      target: "#leftbar-org-projects",
       content: "Projects help you organize all test cases for your product. Think of them as a store for your tests.",
-      disableBeacon: true, // Disable the beacon for this step
+      disableBeacon: true,
     },
     {
-      target: "#leftbar-org-pricing", // CSS selector for the element to highlight
+      target: "#leftbar-org-pricing",
       content: "This is the Pricing tab, where you can manage your subscription and costs.",
-      disableBeacon: true, // Disable the beacon for this step
+      disableBeacon: true,
     },
     {
-      target: "#leftbar-org-integrations", // CSS selector for the element to highlight
+      target: "#leftbar-org-integrations",
       content: "Integrate with various apps for task tracking and other functionalities here.",
-      disableBeacon: true, // Disable the beacon for this step
+      disableBeacon: true,
     },
     {
-      target: "#leftbar-org-agent", // CSS selector for the element to highlight
+      target: "#leftbar-org-agent",
       content: "Agents perform actions for you. Create one to get started with automating tasks.",
-      disableBeacon: true, // Disable the beacon for this step
+      disableBeacon: true,
     },
     {
-      target: "#leftbar-org-vnc", // CSS selector for the element to highlight
+      target: "#leftbar-org-vnc",
       content: "This is the VNC tab, where you can monitor what your agents are doing in real-time.",
-      disableBeacon: true, // Disable the beacon for this step
+      disableBeacon: true,
     }
   ];
 
   useEffect(() => {
-    // Check if the user has visited before
     const hasVisitedBefore = localStorage.getItem('hasVisitedBefore');
-    console.log({ hasVisitedBefore })
     if (!hasVisitedBefore) {
-      setRun(true); // Start the tour if it's the first visit
-      localStorage.setItem('hasVisitedBefore', 'true'); // Mark as visited
+      setRun(true);
+      localStorage.setItem('hasVisitedBefore', 'true');
     }
   }, []);
 
   const handleStartTour = () => {
-    setRun(true); // Set run to true to start the tour
+    setRun(true);
   };
 
   return (
     <PageLayout layout="full-width">
-      <Joyride
-        steps={steps}
-        run={run} // Controls whether the tour is running
-        continuous // Automatically moves to the next step
-        scrollToFirstStep // Scrolls to the first step if not in view
-        showProgress={true} // Hide step progress
-        showSkipButton={true} // Hide the skip button
-        disableOverlayClose // Prevent closing the tour by clicking outside
-      />
-
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '24px' }}>
-        <Title level={1} style={{ textAlign: 'center', marginBottom: 48 }}>
-          Welcome to Test Automation Platform
-        </Title>
+        <h1 style={{ textAlign: 'center', marginBottom: '48px', fontSize: '2.5rem', fontWeight: 'bold' }}>
+          Welcome to Iris
+        </h1>
 
-        <Paragraph
-          style={{ fontSize: 18, textAlign: 'center', marginBottom: 48 }}
-        >
-          Streamline your testing process with our powerful automation tools.
-          Here's how to get started:
-        </Paragraph>
+        {/* YouTube Video */}
+        <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+            title="Platform Overview"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+        </div>
 
-        <Row gutter={[24, 24]} justify="center">
-          <Col xs={24} sm={12} lg={8}>
-            <Card style={{ height: '100%' }}>
-              <Space
-                direction="vertical"
-                align="center"
-                style={{ width: '100%', textAlign: 'center' }}
-              >
-                <i
-                  className="las la-project-diagram"
-                  style={{ fontSize: 48, color: '#1890ff' }}
-                ></i>
-                <Title level={4}>Create Projects</Title>
-                <Paragraph>
-                  Organize your tests by creating projects. Group related tests
-                  together for better management and collaboration.
-                </Paragraph>
-                <Button
-                  type="primary"
-                  onClick={() => navigate('/organizations/create')}
-                >
-                  Create Project
-                </Button>
-              </Space>
-            </Card>
-          </Col>
+        {/* Known Issues & Community Section */}
+        <div style={{ marginTop: '48px' }}>
+          {/* Known Issues */}
+          <div style={{ marginBottom: '24px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+            <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '16px' }}>Known Issues</h3>
+            <ul style={{ listStyleType: 'disc', paddingLeft: '24px', marginBottom: '16px' }}>
+              <li style={{ marginBottom: '8px' }}>
+                <strong>Issue #1:</strong> VNC connection may be unstable in certain browsers.
+              </li>
+              <li style={{ marginBottom: '8px' }}>
+                <strong>Issue #2:</strong> Test execution might delay in high-load scenarios.
+              </li>
+              <li style={{ marginBottom: '8px' }}>
+                <strong>Issue #3:</strong> If you signed up using Google and cannot see your projects, go to the top and create/select an organization.
+              </li>
+            </ul>
+            <Button type="primary" onClick={() => window.open('https://github.com/pokemonlabs/irisdocs', '_blank')}>
+              Report Issues on GitHub
+            </Button>
+          </div>
 
-          <Col xs={24} sm={12} lg={8}>
-            <Card style={{ height: '100%' }}>
-              <Space
-                direction="vertical"
-                align="center"
-                style={{ width: '100%', textAlign: 'center' }}
-              >
-                <i
-                  className="las la-vial"
-                  style={{ fontSize: 48, color: '#52c41a' }}
-                ></i>
-                <Title level={4}>Design Tests</Title>
-                <Paragraph>
-                  Create automated tests using our intuitive interface. Define
-                  test steps, expected results, and conditions.
-                </Paragraph>
-              </Space>
-            </Card>
-          </Col>
+          {/* Community Links */}
+          <div style={{ marginBottom: '24px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+            <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '16px' }}>Join Our Community</h3>
+            <p style={{ marginBottom: '16px' }}>
+              Get help, share ideas, and connect with other users in our community!
+            </p>
+            <div style={{ display: 'flex', gap: '16px' }}>
+              <Button type="primary" onClick={() => window.open('https://discord.gg/ycBA47aK', '_blank')}>
+                Join Discord
+              </Button>
+              <Button type="primary" onClick={() => window.open('https://github.com/pokemonlabs/irisdocs', '_blank')}>
+                Visit GitHub
+              </Button>
+            </div>
+          </div>
 
-          <Col xs={24} sm={12} lg={8}>
-            <Card style={{ height: '100%' }}>
-              <Space
-                direction="vertical"
-                align="center"
-                style={{ width: '100%', textAlign: 'center' }}
-              >
-                <i
-                  className="las la-play-circle"
-                  style={{ fontSize: 48, color: '#722ed1' }}
-                ></i>
-                <Title level={4}>Run Tests</Title>
-                <Paragraph>
-                  Execute tests with a single click. Monitor progress in
-                  real-time and get detailed reports of test results.
-                </Paragraph>
-              </Space>
-            </Card>
-          </Col>
+          {/* FAQs Section */}
+          <div style={{ padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+            <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '16px' }}>FAQs</h3>
+            <Collapse accordion>
+              <Panel header="How do I create a new project?" key="1">
+                <p>
+                  To create a new project, navigate to the "Projects" tab and click on the "Create Project" button. Follow the prompts to set up your project.
+                </p>
+              </Panel>
+              <Panel header="How do I integrate with third-party apps?" key="2">
+                <p>
+                  Go to the "Integrations" tab and select the app you want to integrate with. Follow the instructions to complete the integration.
+                </p>
+              </Panel>
+              <Panel header="What should I do if I can't see my projects?" key="3">
+                <p>
+                  If you signed up using Google and cannot see your projects, ensure you have created or selected an organization. Go to the top of the page and click on "Create/Select Organization."
+                </p>
+              </Panel>
+            </Collapse>
+          </div>
+        </div>
 
-          <Col xs={24} sm={12} lg={8}>
-            <Card style={{ height: '100%' }}>
-              <Space
-                direction="vertical"
-                align="center"
-                style={{ width: '100%', textAlign: 'center' }}
-              >
-                <i
-                  className="las la-users"
-                  style={{ fontSize: 48, color: '#fa8c16' }}
-                ></i>
-                <Title level={4}>Collaborate</Title>
-                <Paragraph>
-                  Share tests with team members, assign roles, and work together
-                  to improve test coverage.
-                </Paragraph>
-              </Space>
-            </Card>
-          </Col>
-
-          <Col xs={24} sm={12} lg={8}>
-            <Card style={{ height: '100%' }}>
-              <Space
-                direction="vertical"
-                align="center"
-                style={{ width: '100%', textAlign: 'center' }}
-              >
-                <i
-                  className="las la-chart-bar"
-                  style={{ fontSize: 48, color: '#eb2f96' }}
-                ></i>
-                <Title level={4}>Track Results</Title>
-                <Paragraph>
-                  View comprehensive test reports, analyze trends, and identify
-                  areas for improvement.
-                </Paragraph>
-              </Space>
-            </Card>
-          </Col>
-
-          <Col xs={24} sm={12} lg={8}>
-            <Card style={{ height: '100%' }}>
-              <Space
-                direction="vertical"
-                align="center"
-                style={{ width: '100%', textAlign: 'center' }}
-              >
-                <i
-                  className="las la-bell"
-                  style={{ fontSize: 48, color: '#f5222d' }}
-                ></i>
-                <Title level={4}>Stay Updated</Title>
-                <Paragraph>
-                  Receive notifications about test results, team activities, and
-                  important updates.
-                </Paragraph>
-              </Space>
-            </Card>
-          </Col>
-        </Row>
-
-        {/* Add a button to start the tour */}
-        <div style={{ textAlign: 'center', marginTop: 24 }}>
+        {/* Tour button */}
+        <div style={{ textAlign: 'center', marginTop: '24px' }}>
           <Button type="primary" onClick={handleStartTour}>
             Start Tour
           </Button>

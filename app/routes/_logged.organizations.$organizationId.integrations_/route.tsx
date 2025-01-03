@@ -174,7 +174,7 @@ export default function IntegrationsPage() {
         </Title>
         <IntegrationCard
           title="GitHub Integration"
-          description="Connect your GitHub account to access repositories and other GitHub features."
+          description="Connect Iris to your GitHub account to automate QA testing workflows, track changes, and integrate test results with your repositories."
           onAuthenticate={authenticateGithub}
           onFetch={fetchGithubData}
           icon={<GithubOutlined />}
@@ -182,7 +182,7 @@ export default function IntegrationsPage() {
         />
         <IntegrationCard
           title="Slack Integration"
-          description="Connect your Slack workspace to access team information and communication features."
+          description="Integrate Iris with Slack to receive automated QA testing updates, report bugs, and collaborate with your team directly in your workspace."
           onAuthenticate={authenticateSlack}
           onFetch={fetchSlackData}
           icon={<SlackOutlined />}
@@ -190,7 +190,7 @@ export default function IntegrationsPage() {
         />
         <IntegrationCard
           title="Linear Integration"
-          description="Connect your Linear account to manage issues and project workflows."
+          description="Use Iris with Linear to automatically create and manage issues from QA tests, improving your project workflows and tracking test outcomes."
           onAuthenticate={authenticateLinear}
           onFetch={fetchLinearData}
           icon={<LineChartOutlined />}
@@ -198,7 +198,7 @@ export default function IntegrationsPage() {
         />
         <IntegrationCard
           title="Discord Integration"
-          description="Connect your Discord account to access user information and communication features."
+          description="Connect Iris to Discord to receive real-time QA testing alerts, share insights, and collaborate with your team in community channels."
           onAuthenticate={authenticateDiscord}
           onFetch={fetchDiscordData}
           icon={<DiscordOutlined />}
@@ -206,5 +206,6 @@ export default function IntegrationsPage() {
         />
       </div>
     </PageLayout>
+
   );
 }

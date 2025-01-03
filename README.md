@@ -179,3 +179,15 @@ Server-specific logic.
 
 - **`index.tsx`**  
   The main server entry point, initializing server-side configurations and services.
+
+
+
+
+----
+
+Auto org creation doesn't work
+Anthropic agent is not picking up the jobs
+Discord server needs more users
+
+
+---

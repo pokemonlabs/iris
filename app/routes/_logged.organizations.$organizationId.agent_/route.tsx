@@ -133,13 +133,13 @@ export default function AgentConfigPage() {
       case 'anthropic':
         return (
           <Form.Item
-            name="apiKey"
+            name="anthropicApiKey"  // Changed from 'apiKey' to 'anthropicApiKey'
             label="API Key"
             rules={[{ required: true, message: 'API Key is required' }]}
           >
             <Input.Group compact>
               <Form.Item
-                name="apiKey"
+                name="anthropicApiKey"  // Changed from 'apiKey' to 'anthropicApiKey'
                 noStyle
                 rules={[{ required: true, message: 'API Key is required' }]}
               >
@@ -152,9 +152,9 @@ export default function AgentConfigPage() {
               <Button
                 loading={isVerifying}
                 onClick={async () => {
-                  const apiKey = form.getFieldValue('apiKey');
-                  if (apiKey) {
-                    await verifyAnthropicKey(apiKey);
+                  const anthropicApiKey = form.getFieldValue('anthropicApiKey');  // Changed from 'apiKey' to 'anthropicApiKey'
+                  if (anthropicApiKey) {
+                    await verifyAnthropicKey(anthropicApiKey);
                   } else {
                     message.warning('Please enter an API key first');
                   }

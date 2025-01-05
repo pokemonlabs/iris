@@ -206,6 +206,5 @@ export default function IntegrationsPage() {
         />
       </div>
     </PageLayout>
-
   );
 }

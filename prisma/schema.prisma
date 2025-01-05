@@ -156,10 +156,7 @@ model OrganizationRole {
   organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
 }
 
-/// @@allow('create', auth().globalRole == 'ADMIN' || auth().organizationRoles?[organization == this.organization && name == 'owner'])
-/// @@allow('update', auth().globalRole == 'ADMIN' || auth().organizationRoles?[organization == this.organization && name == 'owner'])
-/// @@allow('delete', auth().globalRole == 'ADMIN' || auth().organizationRoles?[organization == this.organization && name == 'owner'])
-/// @@allow('read', true)
+/// @@allow('all', organization.roles?[user == auth() && name == 'owner'])
 model Agent {
   id                 String       @id() @default(uuid())
   provider           String

@@ -199,11 +199,7 @@ model Agent {
     updatedAt          DateTime     @updatedAt @default(now())
 
     // Access rules
-    @@allow('create', auth().globalRole == 'ADMIN' || auth().organizationRoles?[organization == this.organization && name == 'owner'])
-    @@allow('update', auth().globalRole == 'ADMIN' || auth().organizationRoles?[organization == this.organization && name == 'owner'])
-    @@allow('delete', auth().globalRole == 'ADMIN' || auth().organizationRoles?[organization == this.organization && name == 'owner'])
-    @@allow('read', true)
-
+    @@allow('all', organization.roles?[user == auth() && name == 'owner'])
     // @@validate(
     //     (provider == 'ANTHROPIC' && anthropicApiKey != null && awsAccessKeyId == null && awsSecretAccessKey == null) ||
     //     (provider == 'BEDROCK' && awsAccessKeyId != null && awsSecretAccessKey != null && awsRegion != null && anthropicApiKey == null) ||

@@ -2,15 +2,10 @@ import { parse } from "cookie";
 import { z } from 'zod';
 import { Trpc } from '~/core/trpc/base';
 
-const API_BASE = 'https://fuji.lmq.cloudamqp.com/api'
-const CREDENTIALS = 'tjvlzief:beDk8uRGm8JyR1Bb7bvbM4fgxXlq2EGF'
-const QUEUE_NAME = 'task_queue_2'
-const VHOST = 'tjvlzief'
-
 async function makeRequest(url: string, options: RequestInit) {
   const headers = new Headers({
     'Content-Type': 'application/json',
-    'Authorization': `Basic ${Buffer.from(CREDENTIALS).toString('base64')}`,
+    'Authorization': `Basic ${Buffer.from(process.env.RABBITMQ_CREDENTIALS).toString('base64')}`,
   })
 
   const response = await fetch(url, {
@@ -65,12 +60,12 @@ export const RabbitMQRouter = Trpc.createRouter({
       };
 
       // Publish message to queue
-      await makeRequest(`${API_BASE}/exchanges/${VHOST}/amq.default/publish`, {
+      await makeRequest(`${process.env.RABBITMQ_API_BASE}/exchanges/${process.env.RABBITMQ_VHOST}/amq.default/publish`, {
         method: 'POST',
         body: JSON.stringify({
           payload: JSON.stringify(jobData),
           payload_encoding: 'string',
-          routing_key: QUEUE_NAME,
+          routing_key: process.env.RABBITMQ_QUEUE_NAME,
           properties: {
             delivery_mode: 2,
             headers: {},
@@ -83,7 +78,7 @@ export const RabbitMQRouter = Trpc.createRouter({
 
   getJobs: Trpc.procedure.query(async ({ ctx }) => {
     // Get messages from queue
-    const response = await makeRequest(`${API_BASE}/queues/${VHOST}/${QUEUE_NAME}/get`, {
+    const response = await makeRequest(`${process.env.RABBITMQ_API_BASE}/queues/${process.env.RABBITMQ_VHOST}/${process.env.RABBITMQ_QUEUE_NAME}/get`, {
       method: 'POST',
       body: JSON.stringify({
         count: 50,
@@ -107,7 +102,7 @@ export const RabbitMQRouter = Trpc.createRouter({
     )
     .mutation(async ({ input, ctx }) => {
       // Get one message
-      const response = await makeRequest(`${API_BASE}/queues/${VHOST}/${QUEUE_NAME}/get`, {
+      const response = await makeRequest(`${process.env.RABBITMQ_API_BASE}/queues/${process.env.RABBITMQ_VHOST}/${process.env.RABBITMQ_QUEUE_NAME}/get`, {
         method: 'POST',
         body: JSON.stringify({
           count: 1,

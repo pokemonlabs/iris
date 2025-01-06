@@ -19,4 +19,20 @@
 5. last check parallellism
 
 
-the launch ?
+> Test the scenarios where tests would fail, and the agent should be able to log those too
+> Get atleast one integration working, maybe just discord
+> If you have time setup nango.dev on your own environment, so you can allow users to have tons of integrations
+> Record a google video and post it on the dashboard
+> Write and release product hunt and linkedin
+> Also need to check mapping with workers, there might be duplicates, or socketify is not working
+> Pray!
+
+
+
+----
+
+
+For slack for example, you need to write an integration endpoint that sends the payload for slack, discord etc... and then use nango to send the message to the right channel. You should be able to use the jwt token / whatever you used, to figure out who to send this message to.
+
+
+You will still need to pass the schema to the agent, so it can pass it over to the proxy, that connects to nango.dev to send those messages.

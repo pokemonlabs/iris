@@ -114,21 +114,21 @@ export const NavigationLayout: React.FC<Props> = ({ children }) => {
         ),
       requiresSubscription: false,
     },
-    {
-      id: 'org-vnc',
-      key: '/organizations/:organizationId/vnc',
-      label: 'VNC',
-      position: 'leftbar',
-      isVisible: !!organization,
-      onClick: () =>
-        goTo(
-          '/organizations/:organizationId/vnc'.replace(
-            ':organizationId',
-            organization.id,
-          ),
-        ),
-      requiresSubscription: false,
-    },
+    // {
+    //   id: 'org-vnc',
+    //   key: '/organizations/:organizationId/vnc',
+    //   label: 'VNC',
+    //   position: 'leftbar',
+    //   isVisible: !!organization,
+    //   onClick: () =>
+    //     goTo(
+    //       '/organizations/:organizationId/vnc'.replace(
+    //         ':organizationId',
+    //         organization.id,
+    //       ),
+    //     ),
+    //   requiresSubscription: false,
+    // },
   ]
 
   const itemsVisible = items

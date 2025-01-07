@@ -71,7 +71,7 @@ export default function WelcomePage() {
           <iframe
             width="560"
             height="315"
-            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+            src="https://youtu.be/ve-GK7goPAM?si=8YgOh4C447Ae06Ne"
             title="Platform Overview"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

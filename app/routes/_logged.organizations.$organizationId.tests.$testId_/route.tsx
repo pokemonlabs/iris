@@ -91,7 +91,7 @@ export default function TestDetailsPage() {
   const handleRerun = async () => {
     if (!test) return;
     if (!agent) {
-      const agentLink = `${window.location.origin}/organizations/$/agent`;
+      const agentLink = `${window.location.origin}/organizations/${organizationId}/agent`;
       message.error({
         content: (
           <span>
@@ -125,7 +125,15 @@ export default function TestDetailsPage() {
       custom_system_prompt:
         'You are an ai agent responsible for testing a user journey. You will exit in two cases - If there is an error, or if you have finished the task.',
       only_n_most_recent_images: 1,
+      testRunId: testRun.id,
+      url: test.url,
       agentId: test.createdById,
+      // @ts-ignore
+      localStorage: test.project.localStorage,
+      // @ts-ignore
+      session: test.project.session,
+      // @ts-ignore
+      cookies: test.project.cookies,
     });
 
     message.success({
@@ -239,14 +247,22 @@ export default function TestDetailsPage() {
                 </Title>
               </Col>
               <Col>
-                <Button
-                  type="primary"
-                  icon={<PlayCircleOutlined />}
-                  onClick={handleRerun}
-                  loading={isRunning}
-                >
-                  Run Test
-                </Button>
+                <Space>
+                  <Button
+                    icon={<EyeOutlined />}
+                    onClick={() => navigate(`/organizations/${organizationId}/tests/${testId}/results`)}
+                  >
+                    View Past Runs
+                  </Button>
+                  <Button
+                    type="primary"
+                    icon={<PlayCircleOutlined />}
+                    onClick={handleRerun}
+                    loading={isRunning}
+                  >
+                    Run Test
+                  </Button>
+                </Space>
               </Col>
             </Row>
           </Card>

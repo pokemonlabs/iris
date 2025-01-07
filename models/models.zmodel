@@ -49,9 +49,9 @@ model Project {
     updatedAt      DateTime      @updatedAt @default(now())
 
     // New fields for storing cookie, session, and localStorage data
-    cookies        Json?         // JSON field for storing cookies
-    session        Json?         // JSON field for storing session data
-    localStorage   Json?         // JSON field for storing localStorage data
+    cookies        Json?         @default("{}") // JSON field for storing cookies
+    session        Json?         @default("{}") // JSON field for storing session data
+    localStorage   Json?         @default("{}") // JSON field for storing localStorage data
 
     @@allow("all", true)
 }

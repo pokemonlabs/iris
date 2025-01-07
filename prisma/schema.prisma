@@ -60,9 +60,9 @@ model Project {
   tests          Test[]        @relation("project")
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @default(now()) @updatedAt()
-  cookies        Json?
-  session        Json?
-  localStorage   Json?
+  cookies        Json?         @default("{}")
+  session        Json?         @default("{}")
+  localStorage   Json?         @default("{}")
 }
 
 /// @@allow('all', true)

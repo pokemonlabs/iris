@@ -68,15 +68,44 @@ export default function WelcomePage() {
 
         {/* YouTube Video */}
         <div style={{ textAlign: 'center', marginBottom: '48px' }}>
-          <iframe
-            width="560"
-            height="315"
-            src="https://youtu.be/ve-GK7goPAM?si=8YgOh4C447Ae06Ne"
-            title="Platform Overview"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
+          <a
+            href="https://youtu.be/ve-GK7goPAM"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: 'inline-block',
+              width: '560px',
+              height: '315px',
+              backgroundImage: 'url(https://img.youtube.com/vi/ve-GK7goPAM/maxresdefault.jpg)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              position: 'relative',
+              borderRadius: '8px',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
+            }}
+          >
+            <div style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              width: '68px',
+              height: '48px',
+              backgroundColor: 'rgba(0,0,0,0.7)',
+              borderRadius: '8px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}>
+              <div style={{
+                width: '0',
+                height: '0',
+                borderStyle: 'solid',
+                borderWidth: '10px 0 10px 20px',
+                borderColor: 'transparent transparent transparent #fff'
+              }} />
+            </div>
+          </a>
         </div>
 
         {/* Known Issues & Community Section */}

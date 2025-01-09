@@ -36,3 +36,13 @@ For slack for example, you need to write an integration endpoint that sends the 
 
 
 You will still need to pass the schema to the agent, so it can pass it over to the proxy, that connects to nango.dev to send those messages.
+
+
+
+
+Tool for websocket communication
+Tool for screenshot
+If stuck take a screenshot and ask user for additional instruction
+
+
+How to initiate vnc and novnc from the worker

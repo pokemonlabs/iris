@@ -68,10 +68,19 @@ export default function WelcomePage() {
 
         {/* YouTube Video */}
         <div style={{ textAlign: 'center', marginBottom: '48px' }}>
-          <a
-            href="https://youtu.be/ve-GK7goPAM"
-            target="_blank"
-            rel="noopener noreferrer"
+          <div
+            onClick={(e) => {
+              const iframe = document.createElement('iframe');
+              iframe.src = 'https://www.youtube.com/embed/ve-GK7goPAM?autoplay=1';
+              iframe.width = '560';
+              iframe.height = '315';
+              iframe.style.border = 'none';
+              iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+              iframe.allowFullscreen = true;
+              const container = e.currentTarget;
+              container.innerHTML = '';
+              container.appendChild(iframe);
+            }}
             style={{
               display: 'inline-block',
               width: '560px',
@@ -81,7 +90,8 @@ export default function WelcomePage() {
               backgroundPosition: 'center',
               position: 'relative',
               borderRadius: '8px',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
+              boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+              cursor: 'pointer'
             }}
           >
             <div style={{

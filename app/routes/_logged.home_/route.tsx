@@ -68,19 +68,8 @@ export default function WelcomePage() {
 
         {/* YouTube Video */}
         <div style={{ textAlign: 'center', marginBottom: '48px' }}>
-          <div
-            onClick={(e) => {
-              const iframe = document.createElement('iframe');
-              iframe.src = 'https://www.youtube.com/embed/ve-GK7goPAM?autoplay=1';
-              iframe.width = '560';
-              iframe.height = '315';
-              iframe.style.border = 'none';
-              iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-              iframe.allowFullscreen = true;
-              const container = e.currentTarget;
-              container.innerHTML = '';
-              container.appendChild(iframe);
-            }}
+          <a
+            href="https://youtu.be/ve-GK7goPAM"
             style={{
               display: 'inline-block',
               width: '560px',
@@ -90,8 +79,7 @@ export default function WelcomePage() {
               backgroundPosition: 'center',
               position: 'relative',
               borderRadius: '8px',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-              cursor: 'pointer'
+              boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
             }}
           >
             <div style={{
@@ -115,75 +103,76 @@ export default function WelcomePage() {
                 borderColor: 'transparent transparent transparent #fff'
               }} />
             </div>
-          </div>
+          </a>
+        </div>
 
-          {/* Known Issues & Community Section */}
-          <div style={{ marginTop: '48px' }}>
-            {/* Known Issues */}
-            <div style={{ marginBottom: '24px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
-              <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '16px' }}>Known Issues</h3>
-              <ul style={{ listStyleType: 'disc', paddingLeft: '24px', marginBottom: '16px' }}>
-                <li style={{ marginBottom: '8px' }}>
-                  <strong>Issue #1:</strong> VNC connection may be unstable in certain browsers.
-                </li>
-                <li style={{ marginBottom: '8px' }}>
-                  <strong>Issue #2:</strong> Test execution might delay in high-load scenarios.
-                </li>
-                <li style={{ marginBottom: '8px' }}>
-                  <strong>Issue #3:</strong> If you signed up using Google and cannot see your projects, go to the top and create/select an organization.
-                </li>
-              </ul>
-              <Button type="primary" onClick={() => window.open('https://github.com/pokemonlabs/irisdocs', '_blank')}>
-                Report Issues on GitHub
-              </Button>
-            </div>
-
-            {/* Community Links */}
-            <div style={{ marginBottom: '24px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
-              <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '16px' }}>Join Our Community</h3>
-              <p style={{ marginBottom: '16px' }}>
-                Get help, share ideas, and connect with other users in our community!
-              </p>
-              <div style={{ display: 'flex', gap: '16px' }}>
-                <Button type="primary" onClick={() => window.open('https://discord.gg/ycBA47aK', '_blank')}>
-                  Join Discord
-                </Button>
-                <Button type="primary" onClick={() => window.open('https://github.com/pokemonlabs/irisdocs', '_blank')}>
-                  Visit GitHub
-                </Button>
-              </div>
-            </div>
-
-            {/* FAQs Section */}
-            <div style={{ padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
-              <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '16px' }}>FAQs</h3>
-              <Collapse accordion>
-                <Panel header="How do I create a new project?" key="1">
-                  <p>
-                    To create a new project, navigate to the "Projects" tab and click on the "Create Project" button. Follow the prompts to set up your project.
-                  </p>
-                </Panel>
-                <Panel header="How do I integrate with third-party apps?" key="2">
-                  <p>
-                    Go to the "Integrations" tab and select the app you want to integrate with. Follow the instructions to complete the integration.
-                  </p>
-                </Panel>
-                <Panel header="What should I do if I can't see my projects?" key="3">
-                  <p>
-                    If you signed up using Google and cannot see your projects, ensure you have created or selected an organization. Go to the top of the page and click on "Create/Select Organization."
-                  </p>
-                </Panel>
-              </Collapse>
-            </div>
-          </div>
-
-          {/* Tour button */}
-          <div style={{ textAlign: 'center', marginTop: '24px' }}>
-            <Button type="primary" onClick={handleStartTour}>
-              Start Tour
+        {/* Known Issues & Community Section */}
+        <div style={{ marginTop: '48px' }}>
+          {/* Known Issues */}
+          <div style={{ marginBottom: '24px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+            <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '16px' }}>Known Issues</h3>
+            <ul style={{ listStyleType: 'disc', paddingLeft: '24px', marginBottom: '16px' }}>
+              <li style={{ marginBottom: '8px' }}>
+                <strong>Issue #1:</strong> VNC connection may be unstable in certain browsers.
+              </li>
+              <li style={{ marginBottom: '8px' }}>
+                <strong>Issue #2:</strong> Test execution might delay in high-load scenarios.
+              </li>
+              <li style={{ marginBottom: '8px' }}>
+                <strong>Issue #3:</strong> If you signed up using Google and cannot see your projects, go to the top and create/select an organization.
+              </li>
+            </ul>
+            <Button type="primary" onClick={() => window.open('https://github.com/pokemonlabs/irisdocs', '_blank')}>
+              Report Issues on GitHub
             </Button>
           </div>
+
+          {/* Community Links */}
+          <div style={{ marginBottom: '24px', padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+            <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '16px' }}>Join Our Community</h3>
+            <p style={{ marginBottom: '16px' }}>
+              Get help, share ideas, and connect with other users in our community!
+            </p>
+            <div style={{ display: 'flex', gap: '16px' }}>
+              <Button type="primary" onClick={() => window.open('https://discord.gg/ycBA47aK', '_blank')}>
+                Join Discord
+              </Button>
+              <Button type="primary" onClick={() => window.open('https://github.com/pokemonlabs/irisdocs', '_blank')}>
+                Visit GitHub
+              </Button>
+            </div>
+          </div>
+
+          {/* FAQs Section */}
+          <div style={{ padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
+            <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '16px' }}>FAQs</h3>
+            <Collapse accordion>
+              <Panel header="How do I create a new project?" key="1">
+                <p>
+                  To create a new project, navigate to the "Projects" tab and click on the "Create Project" button. Follow the prompts to set up your project.
+                </p>
+              </Panel>
+              <Panel header="How do I integrate with third-party apps?" key="2">
+                <p>
+                  Go to the "Integrations" tab and select the app you want to integrate with. Follow the instructions to complete the integration.
+                </p>
+              </Panel>
+              <Panel header="What should I do if I can't see my projects?" key="3">
+                <p>
+                  If you signed up using Google and cannot see your projects, ensure you have created or selected an organization. Go to the top of the page and click on "Create/Select Organization."
+                </p>
+              </Panel>
+            </Collapse>
+          </div>
         </div>
+
+        {/* Tour button */}
+        <div style={{ textAlign: 'center', marginTop: '24px' }}>
+          <Button type="primary" onClick={handleStartTour}>
+            Start Tour
+          </Button>
+        </div>
+      </div>
     </PageLayout>
   );
 }

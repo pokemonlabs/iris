@@ -69,6 +69,7 @@
     "postcss": "^8.4.38",
     "posthog-js": "^1.167.0",
     "prisma": "^5.19.1",
+    "pusher-js": "8.4.0-rc2",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-joyride": "^2.9.3",
@@ -88,6 +89,7 @@
   "devDependencies": {
     "@flydotio/dockerfile": "^0.5.9",
     "@marblism/eslint-plugin": "^1.0.0",
+    "@remix-pwa/dev": "^3.1.0",
     "@remix-run/dev": "^2.13.1",
     "@types/amqplib": "^0.10.6",
     "@types/bcryptjs": "^2.4.6",

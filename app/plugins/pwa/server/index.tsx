@@ -30,6 +30,7 @@ const trpcRouter = Trpc.createRouter({
             } else {
                 await ctx.database.pwaSubscription.create({
                     data: {
+                        userId: user.id,
                         content: JSON.stringify(subscription),
                     },
                 })

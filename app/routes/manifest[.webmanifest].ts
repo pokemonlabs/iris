@@ -4,8 +4,9 @@ import { json } from '@remix-run/node';
 export const loader = () => {
   return json(
     {
-      short_name: 'medx1',
-      name: 'Medx1',
+      id: '/',
+      short_name: 'Iris',
+      name: 'Iris',
       start_url: '/',
       display: 'standalone',
       background_color: '#d3d7dd',

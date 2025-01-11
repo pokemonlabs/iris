@@ -82,7 +82,7 @@ export default function App() {
   useEffect(() => {
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker
-        .register('/entry.worker.js')
+        .register('/entry.worker')
         .then((registration) => {
           console.log('Service Worker registered with scope:', registration.scope);
         })

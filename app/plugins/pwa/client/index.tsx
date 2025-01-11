@@ -58,7 +58,9 @@ const Toggle: React.FC<Props> = ({ onSubcribe }) => {
         } else {
             subscribeToPush(webPushPublicKey, async subscription => {
                 try {
-                    await saveSubscription({ subscription: JSON.stringify(subscription) })
+                    await saveSubscription({
+                        subscription: JSON.stringify(subscription),
+                    })
 
                     onSubcribe?.(subscription)
 

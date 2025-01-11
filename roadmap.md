@@ -46,3 +46,12 @@ If stuck take a screenshot and ask user for additional instruction
 
 
 How to initiate vnc and novnc from the worker
+
+
+
+
+write a function call that triggers notification to the user, that the job is picked up. 
+On this notification event, we can then connect to the vnc and novnc and start the job.
+- can expose some environment variable, so nginx can route the request to the right container
+- we can also use the user-data-dir so the user's state can be persisted between runs. use shared volume so each worker has knowledge of all user states
+

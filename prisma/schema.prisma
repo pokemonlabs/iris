@@ -48,6 +48,7 @@ model User {
   testsAsCreatedBy     Test[]             @relation("createdBy")
   testRunsAsExecutedBy TestRun[]          @relation("executedBy")
   testShares           TestShare[]        @relation("user")
+  pwaSubscriptions     PwaSubscription[]
 }
 
 /// @@allow('all', true)
@@ -189,4 +190,16 @@ model Integration {
 
   @@index([organizationId])
   @@index([type])
+}
+
+/// @@allow('read', auth().id == this.userId || auth().globalRole == 'ADMIN')
+/// @@allow('create', auth().id == this.userId || auth().globalRole == 'ADMIN')
+/// @@allow('delete', auth().id == this.userId || auth().globalRole == 'ADMIN')
+model PwaSubscription {
+  id      String @id() @default(uuid())
+  userId  String
+  content Json
+  user    User   @relation(fields: [userId], references: [id])
+
+  @@index([userId])
 }

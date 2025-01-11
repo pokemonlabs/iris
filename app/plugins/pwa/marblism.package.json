@@ -1,0 +1,8 @@
+{
+    "name": "pwa",
+    "version": "1.0.0",
+    "description": "Allows your app to be installed on a user's device",
+    "dependencies": [
+        "@remix-pwa"
+    ]
+}

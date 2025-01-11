@@ -25,6 +25,7 @@ model User {
     testsAsCreatedBy     Test[]             @relation("createdBy")
     testRunsAsExecutedBy TestRun[]          @relation("executedBy")
     testShares           TestShare[]        @relation("user")
+    pwaSubscriptions    PwaSubscription[]  // Relation to PwaSubscription
 
     @@auth()
     @@allow("all", auth().id == this.id)
@@ -231,4 +232,19 @@ model Integration {
     @@allow('all', organization.roles?[user == auth()])
     @@index([organizationId])
     @@index([type])
+}
+
+
+
+model PwaSubscription {
+    id      String @id @default(uuid())
+    userId  String
+    content Json
+
+    user    User   @relation(fields: [userId], references: [id]) // Relation to User
+
+    @@index([userId])
+    @@allow("read", auth().id == this.userId || auth().globalRole == 'ADMIN')
+    @@allow("create", auth().id == this.userId || auth().globalRole == 'ADMIN')
+    @@allow("delete", auth().id == this.userId || auth().globalRole == 'ADMIN')
 }

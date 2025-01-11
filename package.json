@@ -34,6 +34,7 @@
     "@nangohq/frontend": "^0.48.1",
     "@nangohq/node": "^0.48.1",
     "@prisma/client": "^5.19.1",
+    "@remix-pwa/push": "^2.10.3",
     "@remix-run/express": "^2.13.1",
     "@remix-run/node": "^2.13.1",
     "@remix-run/react": "^2.13.1",

@@ -11,6 +11,7 @@ import createOrganizationRouter from "./Organization.router";
 import createOrganizationRoleRouter from "./OrganizationRole.router";
 import createAgentRouter from "./Agent.router";
 import createIntegrationRouter from "./Integration.router";
+import createPwaSubscriptionRouter from "./PwaSubscription.router";
 import { ClientType as UserClientType } from "./User.router";
 import { ClientType as ProjectClientType } from "./Project.router";
 import { ClientType as TestClientType } from "./Test.router";
@@ -21,6 +22,7 @@ import { ClientType as OrganizationClientType } from "./Organization.router";
 import { ClientType as OrganizationRoleClientType } from "./OrganizationRole.router";
 import { ClientType as AgentClientType } from "./Agent.router";
 import { ClientType as IntegrationClientType } from "./Integration.router";
+import { ClientType as PwaSubscriptionClientType } from "./PwaSubscription.router";
 
 export type BaseConfig = AnyRootConfig;
 
@@ -55,6 +57,7 @@ export function createRouter<Config extends BaseConfig>(router: RouterFactory<Co
         organizationRole: createOrganizationRoleRouter(router, procedure),
         agent: createAgentRouter(router, procedure),
         integration: createIntegrationRouter(router, procedure),
+        pwaSubscription: createPwaSubscriptionRouter(router, procedure),
     }
     );
 }
@@ -70,4 +73,5 @@ export interface ClientType<AppRouter extends AnyRouter> {
     organizationRole: OrganizationRoleClientType<AppRouter>;
     agent: AgentClientType<AppRouter>;
     integration: IntegrationClientType<AppRouter>;
+    pwaSubscription: PwaSubscriptionClientType<AppRouter>;
 }

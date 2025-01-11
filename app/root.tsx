@@ -8,6 +8,7 @@ import {
   ScrollRestoration,
 } from '@remix-run/react'
 
+import { useEffect } from 'react'
 import { WorkspaceProvider } from './core/.iris/workspace'
 import { UserProvider } from './core/context'
 import { TrpcClient } from './core/trpc'
@@ -51,6 +52,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="manifest" href="/manifest.webmanifest" />
         <Meta />
         <Links />
       </head>
@@ -77,5 +79,17 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
+  useEffect(() => {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker
+        .register('/entry.worker.js')
+        .then((registration) => {
+          console.log('Service Worker registered with scope:', registration.scope);
+        })
+        .catch((error) => {
+          console.error('Service Worker registration failed:', error);
+        });
+    }
+  }, []);
   return <Outlet />
 }

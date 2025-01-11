@@ -6,6 +6,7 @@ import { Api } from '@/core/trpc'
 import { PageLayout } from '@/designSystem'
 import { User } from '@prisma/client'
 import { useEffect, useState } from 'react'
+import { PwaClient } from '~/plugins/pwa/client'
 
 export default function ProfilePage() {
   const { user, refetch: refetchUser } = useUserContext()
@@ -67,6 +68,7 @@ export default function ProfilePage() {
 
   return (
     <PageLayout layout="super-narrow">
+      <PwaClient.Toggle />
       <Flex justify="space-between" align="center">
         <Typography.Title level={1}>Profile</Typography.Title>
         <Button onClick={handleClickLogout} loading={isLoadingLogout}>

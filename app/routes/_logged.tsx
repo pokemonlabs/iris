@@ -16,6 +16,7 @@ type Job = {
 export default function LoggedLayout() {
   const { isLoggedIn, isLoading } = useUserContext()
   const [currentJob, setCurrentJob] = useState<Job | null>(null)
+  const [ngrokUrl, setNgrokUrl] = useState<string | null>(null)
   const router = useNavigate()
 
   useEffect(() => {
@@ -33,18 +34,15 @@ export default function LoggedLayout() {
       // Subscribe to jobs channel
       const channel = pusher.subscribe('my-channel')
 
-      channel.bind('my-event', (job: Job) => {
-        if (job.type === 'urgent') {
-          // Show modal for urgent jobs
-          setCurrentJob(job)
-        } else {
-          // Show notification for normal jobs
-          notification.info({
-            message: 'New Job Available',
-            description: job.title,
-            placement: 'topRight'
-          })
-        }
+      // Listen for ngrok URL event
+      channel.bind('ngrok-url-event', (data: { url: string }) => {
+        setNgrokUrl(data.url)
+        notification.info({
+          message: 'Ngrok URL Updated',
+          description: `New ngrok URL: ${data.url}`,
+          duration: 0, // Makes it persistent
+          key: 'ngrok-notification'
+        })
       })
 
       return () => {
@@ -97,6 +95,17 @@ export default function LoggedLayout() {
             </>
           )}
         </Modal>
+
+        {ngrokUrl && (
+          <div style={{ position: 'fixed', bottom: 20, right: 20 }}>
+            <Button
+              type="primary"
+              onClick={() => window.open(ngrokUrl, '_blank')}
+            >
+              Open Ngrok URL
+            </Button>
+          </div>
+        )}
       </>
     )
   }

@@ -1,7 +1,7 @@
 import { useUserContext } from '@/core/context'
 import { NavigationLayout } from '@/designSystem/layouts/NavigationLayout'
 import { Outlet, useNavigate } from '@remix-run/react'
-import { Button, Modal, notification } from 'antd'
+import { Button, Input, Modal, notification } from 'antd'
 import Pusher from 'pusher-js'
 import { useEffect, useState } from 'react'
 import { MrbSplashScreen } from '~/designSystem'
@@ -16,7 +16,8 @@ type Job = {
 export default function LoggedLayout() {
   const { isLoggedIn, isLoading } = useUserContext()
   const [currentJob, setCurrentJob] = useState<Job | null>(null)
-  const [ngrokUrl, setNgrokUrl] = useState<string | null>(null)
+  const [otp, setOtp] = useState<string>('')
+  const [otpNotification, setOtpNotification] = useState<{ key: string, message: string } | null>(null)
   const router = useNavigate()
 
   useEffect(() => {
@@ -34,15 +35,27 @@ export default function LoggedLayout() {
       // Subscribe to jobs channel
       const channel = pusher.subscribe('my-channel')
 
-      // Listen for ngrok URL event
-      channel.bind('ngrok-url-event', (data: { url: string }) => {
-        setNgrokUrl(data.url)
+      // Listen for OTP event
+      channel.bind('otp-event', (data: { otp: string }) => {
+        const notificationKey = `otp-notification-${Date.now()}`
         notification.info({
-          message: 'Ngrok URL Updated',
-          description: `New ngrok URL: ${data.url}`,
+          message: 'New OTP Received',
+          description: `OTP: ${data.otp}`,
           duration: 0, // Makes it persistent
-          key: 'ngrok-notification'
+          key: notificationKey,
+          btn: (
+            <Button
+              type="primary"
+              onClick={() => {
+                notification.destroy(notificationKey)
+                setOtpNotification(null)
+              }}
+            >
+              Close
+            </Button>
+          )
         })
+        setOtpNotification({ key: notificationKey, message: data.otp })
       })
 
       return () => {
@@ -62,6 +75,16 @@ export default function LoggedLayout() {
     // Handle job rejection logic here
     console.log('Job rejected:', currentJob?.id)
     setCurrentJob(null)
+  }
+
+  const handleSendOtp = () => {
+    // Handle sending OTP logic here
+    console.log('OTP sent:', otp)
+    setOtp('')
+    if (otpNotification) {
+      notification.destroy(otpNotification.key)
+      setOtpNotification(null)
+    }
   }
 
   if (isLoading) {
@@ -96,13 +119,19 @@ export default function LoggedLayout() {
           )}
         </Modal>
 
-        {ngrokUrl && (
-          <div style={{ position: 'fixed', bottom: 20, right: 20 }}>
+        {otpNotification && (
+          <div style={{ position: 'fixed', bottom: 20, right: 20, zIndex: 1000 }}>
+            <Input
+              placeholder="Enter OTP"
+              value={otp}
+              onChange={(e) => setOtp(e.target.value)}
+              style={{ marginBottom: 10 }}
+            />
             <Button
               type="primary"
-              onClick={() => window.open(ngrokUrl, '_blank')}
+              onClick={handleSendOtp}
             >
-              Open Ngrok URL
+              Send OTP
             </Button>
           </div>
         )}

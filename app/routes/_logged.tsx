@@ -51,8 +51,9 @@ export default function LoggedLayout() {
         }
 
         const handleOtpSubmit = () => {
+          console.log('OtpSubmit', { otpValue, otp })
           if (otpValue.trim()) {
-            channel.trigger('otp-response', { otp: otpValue }) // Trigger OTP response
+            channel.trigger('client-otp-response', { otp: otpValue }) // Trigger OTP response
             notification.destroy(notificationKey) // Close the notification
             setOtpNotification(null) // Reset OTP notification state
             // handleSendOtp()
@@ -105,15 +106,15 @@ export default function LoggedLayout() {
     setCurrentJob(null)
   }
 
-  const handleSendOtp = () => {
-    // Handle sending OTP logic here
-    console.log('OTP sent:', otp)
-    setOtp('')
-    if (otpNotification) {
-      notification.destroy(otpNotification.key)
-      setOtpNotification(null)
-    }
-  }
+  // const handleSendOtp = () => {
+  //   // Handle sending OTP logic here
+  //   console.log('OTP sent:', otp)
+  //   setOtp('')
+  //   if (otpNotification) {
+  //     notification.destroy(otpNotification.key)
+  //     setOtpNotification(null)
+  //   }
+  // }
 
   if (isLoading) {
     return <MrbSplashScreen />
@@ -147,7 +148,7 @@ export default function LoggedLayout() {
           )}
         </Modal>
 
-        {otpNotification && (
+        {/* {otpNotification && (
           <div
             style={{ position: 'fixed', bottom: 20, right: 20, zIndex: 1000 }}
           >
@@ -161,7 +162,7 @@ export default function LoggedLayout() {
               Send OTP
             </Button>
           </div>
-        )}
+        )} */}
       </>
     )
   }

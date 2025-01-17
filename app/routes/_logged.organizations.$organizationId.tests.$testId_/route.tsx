@@ -156,7 +156,7 @@ export default function TestDetailsPage() {
       },
     });
 
-    navigate(`/organizations/$/tests/$/results`);
+    navigate(`/organizations/${organizationId}/tests/${testId}`);
   };
 
   if (isLoading) {

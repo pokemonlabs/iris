@@ -87,6 +87,38 @@ export default function LoggedLayout() {
         setOtpNotification({ key: notificationKey, message: data.otp })
       })
 
+
+      // Listen for browser session preview URL
+      channel.bind('browser-session', (data: {
+        type: string,
+        live_agent_preview_url: string,
+        worker_id: string,
+        timestamp: string
+      }) => {
+        if (data.type === 'live_agent_preview_url') {
+          const notificationKey = `preview-notification-${Date.now()}`
+
+          notification.info({
+            message: 'Browser Session Preview Available',
+            description: (
+              <div>
+                <p>A live preview session is available at:</p>
+                <a href={data.live_agent_preview_url} target="_blank" rel="noopener noreferrer">
+                  {data.live_agent_preview_url}
+                </a>
+              </div>
+            ),
+            duration: null,
+            key: notificationKey,
+            btn: (
+              <Button type="primary" size="small" onClick={() => notification.destroy(notificationKey)}>
+                Close
+              </Button>
+            )
+          });
+        }
+      });
+
       return () => {
         channel.unbind_all()
         channel.unsubscribe()

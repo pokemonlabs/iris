@@ -71,14 +71,14 @@ export default function TestResultsPage() {
       render: (status: string) => (
         <Tag
           color={
-            status === 'SUCCESS'
+            status.toUpperCase() === 'SUCCESS'
               ? 'green'
               : status === 'FAILED'
               ? 'red'
               : 'orange'
           }
         >
-          {status}
+          {status.toUpperCase()}
         </Tag>
       ),
     },
@@ -182,7 +182,7 @@ export default function TestResultsPage() {
                           key: 'status',
                           render: (status: string) => (
                             <Tag color={status.trim().toUpperCase() === 'SUCCESS' ? 'green' : 'red'}>
-                              {status}
+                              {status.toUpperCase()}
                             </Tag>
                           ),
                         },

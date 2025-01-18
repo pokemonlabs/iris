@@ -213,14 +213,14 @@ export default function ProjectTestsPage() {
                     <div className="flex items-center gap-2">
                       <Tag
                         color={
-                          test.testRuns?.[0]?.status === 'SUCCESS'
+                          String(test.testRuns?.[0]?.status).toUpperCase() === 'SUCCESS'
                             ? 'success'
-                            : test.testRuns?.[0]?.status === 'FAILED'
+                            : String(test.testRuns?.[0]?.status).toUpperCase() === 'FAILED'
                               ? 'error'
                               : 'processing'
                         }
                       >
-                        {test.testRuns?.[0]?.status || 'NO RUNS'}
+                        {String(test.testRuns?.[0]?.status).toUpperCase() || 'NO RUNS'}
                       </Tag>
                       {!test.isActive && (
                         <Tag color="default">Inactive</Tag>

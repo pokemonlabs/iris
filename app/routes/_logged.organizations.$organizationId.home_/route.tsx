@@ -71,9 +71,9 @@ export default function DashboardPage() {
   // Calculate statistics
   const totalTests = allTestRuns?.length || 0
   const successfulTests =
-    allTestRuns?.filter(run => run.status === 'SUCCESS')?.length || 0
+    allTestRuns?.filter(run => String(run.status).toUpperCase() === 'SUCCESS')?.length || 0
   const failedTests =
-    allTestRuns?.filter(run => run.status === 'FAILED')?.length || 0
+    allTestRuns?.filter(run => String(run.status).toUpperCase() === 'FAILED')?.length || 0
 
   return (
     <PageLayout layout="full-width">
@@ -154,7 +154,7 @@ export default function DashboardPage() {
                 />
                 <Tag
                   color={
-                    run.status === 'SUCCESS'
+                    String(run.status).toUpperCase() === 'SUCCESS'
                       ? 'success'
                       : run.status === 'FAILED'
                       ? 'error'

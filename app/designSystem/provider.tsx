@@ -9,7 +9,7 @@ import React, {
 
 import { MessageInstance } from 'antd/es/message/interface'
 import { ErrorBoundary, MrbHtml } from './core'
-import { Theme } from './theme/theme'
+import { Theme, DarkTheme } from './theme/theme'
 
 export type DesignSystemContext = {
   isMobile: boolean

@@ -111,7 +111,7 @@ export default function WelcomePage() {
               Get help, share ideas, and connect with other users in our community!
             </p>
             <div style={{ display: 'flex', gap: '16px' }}>
-              <Button type="primary" onClick={() => window.open('https://discord.gg/ycBA47aK', '_blank')}>
+              <Button type="primary" onClick={() => window.open('https://discord.gg/uuNbJQyw6g', '_blank')}>
                 Join Discord
               </Button>
               <Button type="primary" onClick={() => window.open('https://github.com/pokemonlabs/irisdocs', '_blank')}>

@@ -209,7 +209,7 @@ export default function TestResultsPage() {
             type="email"
             value={shareEmail}
             onChange={e => setShareEmail(e.target.value)}
-            style={{ width: '100%', padding: '8px' }}
+            style={{ width: '100%', padding: '8px', border: '1px solid  black', borderRadius: '8px',  }}
           />
         </Modal>
       </div>

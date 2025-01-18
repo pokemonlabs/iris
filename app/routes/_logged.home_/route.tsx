@@ -68,19 +68,19 @@ export default function WelcomePage() {
 
         {/* YouTube Video */}
         <div style={{ textAlign: 'center', marginBottom: '48px' }}>
-          <video
-            controls
-            poster="https://img.youtube.com/vi/ve-GK7goPAM/maxresdefault.jpg"
+          <iframe
+            src="https://www.youtube.com/embed/ve-GK7goPAM"
+            title="YouTube video player"
             style={{
               width: '560px',
               height: '315px',
               borderRadius: '8px',
               boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
             }}
-          >
-            <source src="https://www.youtube.com/embed/ve-GK7goPAM" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
         </div>
 
         {/* Known Issues & Community Section */}

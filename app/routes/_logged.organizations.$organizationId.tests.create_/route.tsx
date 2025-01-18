@@ -158,13 +158,13 @@ export default function CreateTestPage() {
 
                 <Form.Item>
                   <Space>
-                    <Button
+                    {/* <Button
                       type="default"
                       onClick={() => form.validateFields().then(handlePreview)}
                       loading={isPreviewLoading}
                     >
                       <i className="las la-eye" /> Preview Interpretation
-                    </Button>
+                    </Button> */}
                     <Button type="primary" htmlType="submit">
                       <i className="las la-save" /> Create Test
                     </Button>

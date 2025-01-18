@@ -181,7 +181,7 @@ export default function TestResultsPage() {
                           dataIndex: 'status',
                           key: 'status',
                           render: (status: string) => (
-                            <Tag color={status === 'SUCCESS' ? 'green' : 'red'}>
+                            <Tag color={status.trim().toUpperCase() === 'SUCCESS' ? 'green' : 'red'}>
                               {status}
                             </Tag>
                           ),

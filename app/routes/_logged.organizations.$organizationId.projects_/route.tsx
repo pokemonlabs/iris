@@ -59,9 +59,12 @@ export default function ProjectsPage() {
           />
 
           <Row gutter={[16, 16]}>
-            {projects?.map(project => (
+          {projects?.map(project => (
               <Col xs={24} sm={12} lg={8} key={project.id}>
-                <Card hoverable>
+                <Card
+                  onClick={() => navigate(`/organizations/${organizationId}/projects/${project.id}/tests`)}
+                  hoverable
+                >
                   <div className="flex flex-col gap-2">
                     <Title level={4} className="!mb-0">
                       {project.name}
@@ -76,13 +79,19 @@ export default function ProjectsPage() {
                     <div className="flex justify-between">
                       <Button
                         type="primary"
-                        onClick={() => navigate(`/organizations/${organizationId}/projects/${project.id}/tests`)}
+                        onClick={(e) => {
+                          e.stopPropagation(); // Prevent Card's onClick from triggering
+                          navigate(`/organizations/${organizationId}/projects/${project.id}/tests`);
+                        }}
                       >
                         View Tests
                       </Button>
                       <Button
                         type="default"
-                        onClick={() => navigate(`/organizations/${organizationId}/projects/${project.id}/edit`)}
+                        onClick={(e) => {
+                          e.stopPropagation(); // Prevent Card's onClick from triggering
+                          navigate(`/organizations/${organizationId}/projects/${project.id}/edit`);
+                        }}
                       >
                         Edit
                       </Button>

@@ -323,7 +323,8 @@ export default function TestDetailsPage() {
                 </Row>
                 <Timeline>
                   {latestRun.testSteps?.map((step, index) => (
-                    <Timeline.Item key={step.id} color={step.status === 'SUCCESS' ? 'green' : step.status === 'FAILED' ? 'red' : 'blue'}>
+                    <Timeline.Item key={step.id} color={
+                      String(step.status).toUpperCase() === 'SUCCESS' ? 'green' : String(step.status).toUpperCase() === 'FAILED' ? 'red' : 'blue'}>
                       <Card
                         type="inner"
                         title={`Step ${index + 1}`}
@@ -332,7 +333,8 @@ export default function TestDetailsPage() {
                           <Col xs={24} md={12}>
                             <Space direction="vertical">
                               <Text strong>Action: {step.action}</Text>
-                              <Text>Status: <Tag color={step.status === 'SUCCESS' ? 'green' : step.status === 'FAILED' ? 'red' : 'blue'}>{step.status}</Tag></Text>
+                              <Text>Status: <Tag color={
+                                String(step.status).toUpperCase() === 'SUCCESS' ? 'green' : String(step.status).toUpperCase() === 'FAILED' ? 'red' : 'blue'}>{step.status}</Tag></Text>
                             </Space>
                           </Col>
                           {step.screenshotUrl && (

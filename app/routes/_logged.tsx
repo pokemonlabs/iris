@@ -38,32 +38,27 @@ export default function LoggedLayout() {
       // Subscribe to jobs channel
       const channel = pusher.subscribe('channel')
 
-      // Listen for OTP event
-      // Listen for OTP event
-      // Listen for OTP event
-      channel.bind('otp-event', (data: { otp: string }) => {
-        const notificationKey = `otp-notification-${Date.now()}`
 
-        let otpValue = '' // Local variable to hold OTP input
+      channel.bind('otp-event', (data: { message: string }) => {
+        const notificationKey = `otp-notification-${Date.now()}`;
+        let otpValue = ''; // Local variable to hold OTP input
 
         const handleOtpChange = e => {
-          otpValue = e.target.value // Update the local variable
-        }
+          otpValue = e.target.value; // Update the local variable
+        };
 
         const handleOtpSubmit = () => {
-          console.log('OtpSubmit', { otpValue, otp })
           if (otpValue.trim()) {
-            channel.trigger('client-otp-response', { otp: otpValue }) // Trigger OTP response
-            notification.destroy(notificationKey) // Close the notification
-            setOtpNotification(null) // Reset OTP notification state
-            // handleSendOtp()
+            channel.trigger('client-otp-response', { otp: otpValue }); // Trigger OTP response
+            notification.destroy(notificationKey); // Close the notification
+            setOtpNotification(null); // Reset OTP notification state
           } else {
             notification.warning({
               message: 'Validation Error',
               description: 'Please enter the OTP before submitting.',
-            })
+            });
           }
-        }
+        };
 
         notification.open({
           message: 'New OTP Received',
@@ -82,10 +77,10 @@ export default function LoggedLayout() {
           ),
           duration: 0, // Makes the notification persistent
           key: notificationKey,
-        })
+        });
 
-        setOtpNotification({ key: notificationKey, message: data.otp })
-      })
+        setOtpNotification({ key: notificationKey, message: data.message });
+      });
 
 
       // Listen for browser session preview URL
@@ -138,15 +133,6 @@ export default function LoggedLayout() {
     setCurrentJob(null)
   }
 
-  // const handleSendOtp = () => {
-  //   // Handle sending OTP logic here
-  //   console.log('OTP sent:', otp)
-  //   setOtp('')
-  //   if (otpNotification) {
-  //     notification.destroy(otpNotification.key)
-  //     setOtpNotification(null)
-  //   }
-  // }
 
   if (isLoading) {
     return <MrbSplashScreen />

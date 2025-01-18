@@ -144,11 +144,11 @@ export default function WelcomePage() {
         </div>
 
         {/* Tour button */}
-        <div style={{ textAlign: 'center', marginTop: '24px' }}>
+        {/* <div style={{ textAlign: 'center', marginTop: '24px' }}>
           <Button type="primary" onClick={handleStartTour}>
             Start Tour
           </Button>
-        </div>
+        </div> */}
       </div>
     </PageLayout>
   );

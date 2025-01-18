@@ -1,9 +1,8 @@
 import { PageLayout } from '@/designSystem'
 import { useNavigate } from '@remix-run/react'
-import { Button, Collapse } from 'antd'
+import { Button, Collapse, theme } from 'antd'
 import { useEffect, useState } from 'react'
 import Joyride from 'react-joyride'
-import { theme } from 'antd' // Access your Ant Design theme
 
 const { Panel } = Collapse
 
@@ -196,12 +195,7 @@ export default function WelcomePage() {
               community!
             </p>
             <div style={{ display: 'flex', gap: '16px' }}>
-              <Button
-                type="primary"
-                onClick={() =>
-                  window.open('https://discord.gg/ycBA47aK', '_blank')
-                }
-              >
+              <Button type="primary" onClick={() => window.open('https://discord.gg/uuNbJQyw6g', '_blank')}>
                 Join Discord
               </Button>
               <Button

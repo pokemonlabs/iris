@@ -161,7 +161,7 @@ export default function DashboardPage() {
                       : 'processing'
                   }
                 >
-                  {run.status}
+                  {run.status.toUpperCase()}
                 </Tag>
               </List.Item>
             )}

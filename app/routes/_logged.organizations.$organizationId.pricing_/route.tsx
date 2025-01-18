@@ -49,7 +49,7 @@ export default function OrganizationPricingPage() {
   }
 
   const isSubscribed = (product: Product) => {
-    return subscriptions.find(
+    return (subscriptions || []).find(
       subscription => subscription.productId === product.id,
     )
   }

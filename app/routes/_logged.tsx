@@ -1,3 +1,5 @@
+
+import { Api } from '@/core/trpc'
 import { useUserContext } from '@/core/context'
 import { NavigationLayout } from '@/designSystem/layouts/NavigationLayout'
 import { Outlet, useNavigate } from '@remix-run/react'
@@ -23,6 +25,8 @@ export default function LoggedLayout() {
   } | null>(null)
   const router = useNavigate()
 
+  const { mutateAsync: pushOtpToPusher } = Api.rabbitmq.pushOtpToPusher.useMutation()
+
   useEffect(() => {
     if (!isLoading && !isLoggedIn) {
       router('/login')
@@ -38,7 +42,6 @@ export default function LoggedLayout() {
       // Subscribe to jobs channel
       const channel = pusher.subscribe('channel')
 
-
       channel.bind('otp-event', (data: { message: string }) => {
         const notificationKey = `otp-notification-${Date.now()}`;
         let otpValue = ''; // Local variable to hold OTP input
@@ -49,7 +52,9 @@ export default function LoggedLayout() {
 
         const handleOtpSubmit = () => {
           if (otpValue.trim()) {
-            channel.trigger('client-otp-response', { otp: otpValue }); // Trigger OTP response
+            pushOtpToPusher({
+              otp: Number(otpValue)
+            })
             notification.destroy(notificationKey); // Close the notification
             setOtpNotification(null); // Reset OTP notification state
           } else {
@@ -81,7 +86,6 @@ export default function LoggedLayout() {
 
         setOtpNotification({ key: notificationKey, message: data.message });
       });
-
 
       // Listen for browser session preview URL
       channel.bind('browser-session', (data: {

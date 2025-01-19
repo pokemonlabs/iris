@@ -26,7 +26,7 @@ export const LandingFooter: React.FC<Props> = ({ ...props }) => {
             <div className="mr-4  md:flex mb-4">
               <Logo height={50} isLabel />
             </div>
-            <div>Copyright &copy; 2024</div>
+            <div>Copyright &copy; {new Date().getFullYear()}</div>
             <div className="mt-2">All rights reserved</div>
           </div>
           <div className="grid grid-cols-3 gap-10 items-start mt-10 md:mt-0">

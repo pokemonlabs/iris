@@ -99,7 +99,7 @@ export default function LoggedLayout() {
               <div>
                 <p>A live preview session is available at:</p>
                 <a href={data.live_agent_preview_url} target="_blank" rel="noopener noreferrer">
-                  {data.live_agent_preview_url}
+                  Click here to inspect agent actions
                 </a>
               </div>
             ),

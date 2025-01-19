@@ -105,21 +105,36 @@ export default function WelcomePage() {
         </h1>
 
         {/* YouTube Video */}
-        <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            margin: '48px auto',
+            padding: '24px',
+            backgroundColor: '#f9f9f9', // Subtle background
+            borderRadius: '12px',
+            maxWidth: '1200px', // Limits the section width
+            boxShadow: '0 4px 12px rgba(0,0,0,0.1)', // Softer shadow for depth
+          }}
+        >
           <iframe
             src="https://www.youtube.com/embed/ve-GK7goPAM"
             title="YouTube video player"
             style={{
-              width: '560px',
-              height: '315px',
+              width: '100%',
+              maxWidth: '960px', // Restricts width for larger screens
+              height: '54vw', // Scaled dynamically to maintain aspect ratio
+              maxHeight: '540px', // Caps the height for large screens
               borderRadius: '8px',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+              border: 'none', // Removes any default borders
             }}
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           ></iframe>
         </div>
+
 
         {/* Known Issues & Community Section */}
         <div style={{ marginTop: '48px' }}>

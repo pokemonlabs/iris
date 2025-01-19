@@ -110,7 +110,7 @@ export const RabbitMQRouter = Trpc.createRouter({
 
   pushOtpToPusher: Trpc.procedure.input(
     z.object({
-      otp: z.number(),
+      otp: z.string(),
     }),
   )    .mutation(async ({ input, ctx }) => {
     // Get one message

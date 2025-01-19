@@ -53,7 +53,7 @@ export default function LoggedLayout() {
         const handleOtpSubmit = () => {
           if (otpValue.trim()) {
             pushOtpToPusher({
-              otp: Number(otpValue)
+              otp: String(otpValue)
             })
             notification.destroy(notificationKey); // Close the notification
             setOtpNotification(null); // Reset OTP notification state

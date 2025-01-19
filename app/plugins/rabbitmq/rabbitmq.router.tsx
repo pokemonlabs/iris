@@ -1,6 +1,20 @@
 import { parse } from "cookie";
 import { z } from 'zod';
 import { Trpc } from '~/core/trpc/base';
+import Pusher from 'pusher'
+import { zodResponseFormat } from "openai/helpers/zod.mjs";
+
+
+var pusher = new Pusher({
+  appId: "1924168",
+  key: "4801420944db61b44651",
+  secret: "1c24284a08450f77ea40",
+  cluster: "ap2",
+  useTLS: true
+});
+
+
+
 
 async function makeRequest(url: string, options: RequestInit) {
   const headers = new Headers({
@@ -92,6 +106,16 @@ export const RabbitMQRouter = Trpc.createRouter({
     return response
       .map((msg: any) => JSON.parse(msg.payload))
       .filter((jobData: any) => jobData.userId === ctx.session.user.id)
+  }),
+
+  pushOtpToPusher: Trpc.procedure.input(
+    z.object({
+      otp: z.number(),
+    }),
+  )    .mutation(async ({ input, ctx }) => {
+    // Get one message
+    await pusher.trigger("channel", "otp-response", { otp: input.otp });
+    return { success: true }
   }),
 
   deleteJob: Trpc.procedure

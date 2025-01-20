@@ -80,7 +80,21 @@ export default function TestDetailsPage() {
         where: { id: latestRunId },
         data: { status: 'SUCCESS' },
       });
-      message.success('Test marked as done!');
+      message.success('Test marked as success!');
+      // Trigger any necessary side-effects
+      // For example, refresh data or update UI state
+    } catch (error) {
+      message.error('Failed to mark test as done. Please try again.');
+    }
+  };
+
+  const handleMarkAsFail = async (latestRunId) => {
+    try {
+      await updateTest({
+        where: { id: latestRunId },
+        data: { status: 'FAILED' },
+      });
+      message.error('Test marked as failed!');
       // Trigger any necessary side-effects
       // For example, refresh data or update UI state
     } catch (error) {
@@ -311,15 +325,29 @@ export default function TestDetailsPage() {
                       testRunId={latestRun.id}
                     />
                   </Col>
+                {
+                  latestRun.status.toLowerCase() === 'processing' ?
+                  <>
                   <Col>
-                    <Button
-                      type="primary"
-                      icon={<CheckCircleOutlined />}
-                      onClick={() => handleMarkAsDone(latestRun.id)}
-                    >
-                      Mark Test as Done
-                    </Button>
-                  </Col>
+                  <Button
+                    type="primary"
+                    icon={<CheckCircleOutlined />}
+                    onClick={() => handleMarkAsDone(latestRun.id)}
+                  >
+                    Mark Test as Success
+                  </Button>
+                </Col> 
+                <Col>
+                  <Button
+                    type="primary"
+                    icon={<CheckCircleOutlined />}
+                    onClick={() => handleMarkAsFail(latestRun.id)}
+                  >
+                    Mark Test as Failure
+                  </Button>
+                </Col>
+                  </>: null
+                } 
                 </Row>
                 <Timeline>
                   {latestRun.testSteps?.map((step, index) => (

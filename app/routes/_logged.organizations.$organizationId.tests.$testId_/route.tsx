@@ -144,10 +144,11 @@ export default function TestDetailsPage() {
       agentId: test.createdById,
       // @ts-ignore
       localStorage: test.project.localStorage,
+      useUserDataDirectory: test.project.useUserDataDirectory,
       // @ts-ignore
       session: test.project.session,
       // @ts-ignore
-      cookies: test.project.cookies,
+      cookies: test.project.cookies
     });
 
     message.success({

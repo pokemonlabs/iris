@@ -103,6 +103,7 @@ export default function ProjectTestsPage() {
         cookies: project.cookies,
         // @ts-ignore
         localStorage: project.localStorage,
+        useUserDataDirectory: project.useUserDataDirectory,
       });
 
       message.success('Test started successfully')
@@ -148,6 +149,7 @@ export default function ProjectTestsPage() {
         cookies: project.cookies,
         // @ts-ignore
         localStorage: project.localStorage,
+        useUserDataDirectory: project.useUserDataDirectory,
       });
     }
 

@@ -54,6 +54,7 @@ model Project {
     session        Json?         @default("{}") // JSON field for storing session data
     localStorage   Json?         @default("{}") // JSON field for storing localStorage data
 
+    useUserDataDirectory Boolean @default(false)
     @@allow("all", true)
 }
 

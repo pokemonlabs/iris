@@ -124,8 +124,7 @@ export default function WelcomePage() {
             style={{
               width: '100%',
               maxWidth: '960px', // Restricts width for larger screens
-              height: '54vw', // Scaled dynamically to maintain aspect ratio
-              maxHeight: '540px', // Caps the height for large screens
+              height: 'calc(100vw * 9 / 16)', // Maintains aspect ratio
               borderRadius: '8px',
               border: 'none', // Removes any default borders
             }}

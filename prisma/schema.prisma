@@ -53,17 +53,18 @@ model User {
 
 /// @@allow('all', true)
 model Project {
-  id             String        @id() @default(uuid())
-  name           String
-  description    String?
-  organizationId String
-  organization   Organization? @relation(fields: [organizationId], references: [id], name: "organization")
-  tests          Test[]        @relation("project")
-  createdAt      DateTime      @default(now())
-  updatedAt      DateTime      @default(now()) @updatedAt()
-  cookies        Json?         @default("{}")
-  session        Json?         @default("{}")
-  localStorage   Json?         @default("{}")
+  id                   String        @id() @default(uuid())
+  name                 String
+  description          String?
+  organizationId       String
+  organization         Organization? @relation(fields: [organizationId], references: [id], name: "organization")
+  tests                Test[]        @relation("project")
+  createdAt            DateTime      @default(now())
+  updatedAt            DateTime      @default(now()) @updatedAt()
+  cookies              Json?         @default("{}")
+  session              Json?         @default("{}")
+  localStorage         Json?         @default("{}")
+  useUserDataDirectory Boolean       @default(false)
 }
 
 /// @@allow('all', true)

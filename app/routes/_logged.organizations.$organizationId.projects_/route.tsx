@@ -29,6 +29,7 @@ export default function ProjectsPage() {
     }
   })
 
+
   return (
     <PageLayout layout="full-width">
       <div className="max-w-[1200px] mx-auto p-6">

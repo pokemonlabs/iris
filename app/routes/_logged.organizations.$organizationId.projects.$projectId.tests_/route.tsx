@@ -89,6 +89,7 @@ export default function ProjectTestsPage() {
 
       await pushJob({
         // shouldn't the url come from the project page itself! lol
+        projectId: project.id,
         url: test.url,
         testRunId: testRun.id,
         message: test.naturalLanguageInput + `testRunId: ${testRun.id}, use this to submit the steps you took.`,
@@ -135,6 +136,7 @@ export default function ProjectTestsPage() {
 
       await pushJob({
         // shouldn't the url come from the project page itself! lol
+        projectId: project.id,
         url: test.url,
         testRunId: testRun.id,
         message: test.naturalLanguageInput + `testRunId: ${testRun.id}, use this to submit the steps you took.`,

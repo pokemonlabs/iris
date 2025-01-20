@@ -132,6 +132,7 @@ export default function TestDetailsPage() {
 
     // check if there is atleast one agent
     await pushJob({
+      projectId: test.projectId,
       message:
         test.naturalLanguageInput +
         `The testRunId is: ${testRun.id}. use this to submit the steps you took to test this`,

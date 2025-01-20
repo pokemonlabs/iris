@@ -39,6 +39,7 @@ export const RabbitMQRouter = Trpc.createRouter({
     .input(
       z.object({
         testRunId: z.string(),
+        projectId: z.string(),
         url: z.string(),
         message: z.string(),
         conversation_id: z.string(),

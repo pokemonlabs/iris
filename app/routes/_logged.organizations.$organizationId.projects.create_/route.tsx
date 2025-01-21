@@ -1,4 +1,4 @@
-import { Typography, Form, Input, Button, Card, message } from 'antd'
+import { Typography, Form, Input, Button, Card, message, Space, Switch } from 'antd'
 const { Title, Text } = Typography
 import { useNavigate, useParams } from '@remix-run/react'
 import { Api } from '@/core/trpc'
@@ -51,6 +51,25 @@ export default function CreateProjectPage() {
               name="description"
             >
               <Input.TextArea rows={4} />
+            </Form.Item>
+
+            <Form.Item
+              label="Use User Data Directory"
+              name="useUserDataDirectory"
+              valuePropName="checked"
+            >
+              <Space>
+                <Switch
+                  onChange={(checked) => {
+                    form.setFieldsValue({ useUserDataDirectory: checked }); // Update form value
+                  }}
+                />
+                {/* {form.getFieldValue("useUserDataDirectory") ? (
+                  <Tag color="green">Active</Tag>
+                ) : (
+                  <Tag color="default">Inactive</Tag>
+                )} */}
+              </Space>
             </Form.Item>
 
             <Form.Item>

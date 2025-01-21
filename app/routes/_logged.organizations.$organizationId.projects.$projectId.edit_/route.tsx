@@ -1,7 +1,7 @@
 import { Api } from '@/core/trpc'
 import { PageLayout } from '@/designSystem'
 import { useNavigate, useParams } from '@remix-run/react'
-import { Button, Card, Col, Input, Row, Space, Typography, message } from 'antd'
+import { Button, Card, Col, Input, Row, Space, Switch, Tag, Typography, message } from 'antd'
 import { useCallback, useState } from 'react'
 
 const { Title, Text } = Typography
@@ -24,6 +24,7 @@ export default function EditProjectPage() {
   // State for form fields
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
+  const [useUserDataDirectory, setUseUserDataDirectory] = useState(false)
   const [cookies, setCookies] = useState<KeyValuePair[]>([])
   const [session, setSession] = useState<KeyValuePair[]>([])
   const [localStorageData, setLocalStorageData] = useState<KeyValuePair[]>([])
@@ -36,6 +37,7 @@ export default function EditProjectPage() {
       onSuccess: (data) => {
         setName(data?.name ?? '')
         setDescription(data?.description ?? '')
+        setUseUserDataDirectory(data.useUserDataDirectory ?? false)
         setCookies(Object.entries(data?.cookies ?? {}).map(([key, value]) => ({ key, value })))
         setSession(Object.entries(data?.session ?? {}).map(([key, value]) => ({ key, value })))
         setLocalStorageData(Object.entries(data?.localStorage ?? {}).map(([key, value]) => ({ key, value })))
@@ -135,6 +137,7 @@ export default function EditProjectPage() {
           cookies: cleanedCookies,
           session: cleanedSession,
           localStorage: cleanedLocalStorage,
+          useUserDataDirectory: useUserDataDirectory
         },
       })
       message.success('Project updated successfully!')
@@ -265,6 +268,22 @@ export default function EditProjectPage() {
                   />
                 </div>
               </Col>
+              <Col xs={24}>
+            <div className="flex flex-col gap-2">
+              <Text strong>Use User Data Directory</Text>
+              <Space>
+                <Switch
+                  checked={useUserDataDirectory}
+                  onChange={(checked) => setUseUserDataDirectory(checked)}
+                />
+                {useUserDataDirectory ? (
+                  <Tag color="green">Active</Tag>
+                ) : (
+                  <Tag color="default">Inactive</Tag>
+                )}
+              </Space>
+            </div>
+        </Col>
             </Row>
           </Card>
 

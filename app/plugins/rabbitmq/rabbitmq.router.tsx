@@ -39,6 +39,7 @@ export const RabbitMQRouter = Trpc.createRouter({
     .input(
       z.object({
         testRunId: z.string(),
+        projectId: z.string(),
         url: z.string(),
         message: z.string(),
         conversation_id: z.string(),
@@ -48,6 +49,7 @@ export const RabbitMQRouter = Trpc.createRouter({
         cookies: z.record(z.string(), z.string()).optional(), // Cookies as key-value pairs
         session: z.record(z.string(), z.string()).optional(), // Session data as key-value pairs
         localStorage: z.record(z.string(), z.string()).optional(), // LocalStorage data as key-value pairs
+        useUserDataDirectory: z.boolean().optional(),
       }))
     .mutation(async ({ input, ctx }) => {
       // following is the created by id, not ai agent

@@ -132,6 +132,7 @@ export default function TestDetailsPage() {
 
     // check if there is atleast one agent
     await pushJob({
+      projectId: test.projectId,
       message:
         test.naturalLanguageInput +
         `The testRunId is: ${testRun.id}. use this to submit the steps you took to test this`,
@@ -144,10 +145,11 @@ export default function TestDetailsPage() {
       agentId: test.createdById,
       // @ts-ignore
       localStorage: test.project.localStorage,
+      useUserDataDirectory: test.project.useUserDataDirectory,
       // @ts-ignore
       session: test.project.session,
       // @ts-ignore
-      cookies: test.project.cookies,
+      cookies: test.project.cookies
     });
 
     message.success({

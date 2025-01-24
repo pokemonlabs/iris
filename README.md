@@ -1,6 +1,21 @@
 # <img src="./public/iris.svg" alt="Project Logo" style="vertical-align: middle; width: 40px; height: 40px;" /> Iris
 
 Essential scripts for development and deployment. A modern web application built with cutting-edge technologies.
+## ⭐ Support Us
+
+[![GitHub stars](https://img.shields.io/github/stars/iris-connect/iris?style=social)](https://github.com/iris-connect/iris)
+
+Please consider starring our repository to show your support!
+
+## 💬 Join Our Community
+
+[![Discord](https://img.shields.io/badge/Discord-Join%20Chat-7289da?style=flat&logo=discord)](https://discord.gg/uuNbJQyw6g)
+
+Join our Discord community to:
+- Get help and support
+- Share your feedback and ideas
+- Connect with other Iris users
+- Stay updated on latest developments
 
 ## 🌟 Built With
 

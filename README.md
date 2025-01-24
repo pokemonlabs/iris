@@ -82,9 +82,9 @@ graph TD
 
 ## 🗺 Roadmap
 
-- [ ] Video test generation implementation
-- [ ] Integration of open-source models for private deployments
-- [ ] Test caching system for CI/CD optimization
+- [ ] Video test generation implementation [Generate tests from video recordings]
+- [ ] Integration of open-source models for private deployments [Run tests without having to depend on openai / claude models]
+- [ ] Test caching system for CI/CD optimization [If a test has been run earlier, we should cache it for faster successive executions]
 - [ ] Full CI/CD pipeline implementation
 - [ ] Mobile testing support (iOS/Android)
 - [ ] Multi-cloud deployment configurations

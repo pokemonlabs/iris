@@ -14,6 +14,10 @@ Essential scripts for development and deployment. A modern web application built
 - pnpm 8.x
 - Docker 20.x+
 - PostgreSQL 14+
+- Environment Configuration:  
+  Create a `.env` file in the root directory using the `.env.template` file as a reference.  
+  Replace all placeholder values with your actual credentials and configurations.  
+  **Never commit sensitive data to version control.**
 
 ## 🛠️ Installation
 

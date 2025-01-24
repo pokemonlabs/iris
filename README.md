@@ -1,118 +1,131 @@
-# <img src="./public/iris.svg" alt="Project Logo" style="vertical-align: middle; width: 40px; height: 40px;" /> Iris
 
-Essential scripts for development and deployment. A modern web application built with cutting-edge technologies.
-## ⭐ Support Us
+# <img src="./public/iris.svg" alt="Iris Logo" style="vertical-align: middle; width: 40px; height: 40px;" /> Iris
 
-[![GitHub stars](https://img.shields.io/github/stars/iris-connect/iris?style=social)](https://github.com/iris-connect/iris)
+**Revolutionizing Open-Source AI Testing Infrastructure**
 
-Please consider starring our repository to show your support!
+While AI-powered backend UI testing solutions have proliferated, developers face a critical challenge: most advanced testing agents are closed-source black boxes. Iris emerges as a transparent, community-driven solution - offering enterprise-grade testing capabilities with complete visibility and control.
 
-## 💬 Join Our Community
-
+[![GitHub stars](https://img.shields.io/github/stars/iris-connect/iris?style=social)](https://github.com/iris-connect/iris) 
 [![Discord](https://img.shields.io/badge/Discord-Join%20Chat-7289da?style=flat&logo=discord)](https://discord.gg/uuNbJQyw6g)
+![License](https://img.shields.io/badge/License-MIT-green)
 
-Join our Discord community to:
-- Get help and support
-- Share your feedback and ideas
-- Connect with other Iris users
-- Stay updated on latest developments
+## 🚀 Why Iris?
 
-## 🌟 Built With
+✅ **Full observability** into testing algorithms and processes  
+✅ **Avoid vendor lock-in** with self-hosted AI models  
+✅ **Community-driven improvements** through open collaboration  
+✅ **Modern testing paradigm** combining AI precision with developer control
 
-[![ZenStack](https://img.shields.io/badge/ZenStack-2.0-blue?style=flat&logo=prisma)](https://zenstack.dev)  
-[![Remix](https://img.shields.io/badge/Remix-2.0-purple?style=flat&logo=remix)](https://remix.run)  
+## 🌟 Featured Capabilities
+
+- Visual regression testing with AI-powered analysis
+- Self-healing test scripts using ML models
+- Cross-browser/device testing orchestration
+- CI/CD pipeline integration hooks
+- Real-time test visualization and debugging
+
+## 🛠 Tech Stack
+
+[![ZenStack](https://img.shields.io/badge/ZenStack-2.0-blue?style=flat&logo=prisma)](https://zenstack.dev)
+[![Remix](https://img.shields.io/badge/Remix-2.0-purple?style=flat&logo=remix)](https://remix.run)
 [![Prisma](https://img.shields.io/badge/Prisma-5.0-black?style=flat&logo=prisma)](https://prisma.io)
+[![Docker](https://img.shields.io/badge/Docker-20.x-2496ED?style=flat&logo=docker)](https://docker.com)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14+-336791?style=flat&logo=postgresql)](https://postgresql.org)
 
+![Iris Testing Demo](./tryiris.gif)
 
-![Iris Demo](./tryiris.gif)
+## 🚀 Getting Started
 
-## 📋 Prerequisites
+### 📋 Prerequisites
 
 - Node.js v18+
 - pnpm 8.x
 - Docker 20.x+
 - PostgreSQL 14+
-- Environment Configuration:  
-  Create a `.env` file in the root directory using the `.env.template` file as a reference.  
-  Replace all placeholder values with your actual credentials and configurations.  
-  **Never commit sensitive data to version control.**
+- **Environment Setup**:
+  ```bash
+  cp .env.template .env
+  # Configure your environment variables
+  ```
 
-## 🛠️ Installation
+### ⚡ Quick Installation
 ```bash
 pnpm run init
 ```
-Sets up the complete environment including:
-- Dependency installation
-- Docker container initialization
-- Database schema synchronization
-- Seed data population
+Single command sets up:
+- Full dependency tree
+- Dockerized services
+- Database schema + seed data
+- Pre-commit hooks
 
-## 🚦 Usage
+## 🧩 Core Workflows
 
-### Development Workflow
+### Development Mode
 ```bash
-pnpm run dev    # Start development server with hot-reload
-pnpm run debug  # Launch application debugger
+pnpm run dev    # Hot-reload server
+pnpm run debug  # Interactive debugging
 ```
 
 ### Production Deployment
 ```bash
-pnpm run build  # Create optimized production build
+pnpm run build  # Optimized build
 pnpm run start  # Start production server (port 8099)
 ```
 
-### Database Management
+### Database Operations
 ```bash
-# Schema synchronization
-pnpm run database:sync:dev  # Dev environment (destructive)
-
-# Data operations
+pnpm run database:sync:dev  # Schema sync (dev only)
 pnpm run database:reset     # Full reset + reseed
-pnpm run database:seed      # Populate mock data
+pnpm run database:seed      # Load mock data
 ```
 
-### Code Quality
-```bash
-pnpm run check   # TypeScript & model validation
-pnpm run format  # Code formatting (Prettier)
-pnpm run lint    # Linting (ESLint)
-```
+## 🏗 System Architecture
 
-### Advanced Tools
-```bash
-pnpm run crud:sync       # Regenerate CRUD operations
-pnpm run products:init   # Initialize Stripe integration
-pnpm run docker:init     # Start Docker services
-```
-
-
-### Architecture
 ```mermaid
 graph TD
-    A[User Request] -->|Request| B[Remix App]
-    B -->|Push Job| C[Redis Queue]
-    C -->|Process Job| D[Worker/Processor]
-    D -->|Send Update| B
-    B -->|Store Data| E[PostgreSQL Database]
-    F[External Service] -->|Job Updates| B
+    A[User Interface] -->|HTTP| B[Remix Edge Runtime]
+    B -->|Job Queue| C[Redis Cluster]
+    C -->|Process| D[AI Testing Workers]
+    D -->|Store Results| E[(PostgreSQL)]
+    E -->|Analyze| F[Reporting Dashboard]
+    F -->|Trigger| G[CI/CD Pipeline]
 ```
 
-## 🗺 Roadmap
+## 🧭 Roadmap
 
-- [ ] Video test generation implementation [Generate tests from video recordings]
-- [ ] Integration of open-source models for private deployments [Run tests without having to depend on openai / claude models]
-- [ ] Test caching system for CI/CD optimization [If a test has been run earlier, we should cache it for faster successive executions]
-- [ ] Full CI/CD pipeline implementation
-- [ ] Mobile testing support (iOS/Android)
-- [ ] Multi-cloud deployment configurations
+- **AI Test Generation**  
+  Convert natural language to executable test cases
+- **Private Model Integration**  
+  Support for local LLMs (Llama 2, Mistral)
+- **Intelligent Test Caching**  
+  Context-aware cache invalidation for CI/CD
+- **Multi-Cloud Orchestration**  
+  Unified testing across AWS/GCP/Azure
+- **Mobile Testing Suite**  
+  Cross-platform iOS/Android validation
 
-## 💡 Tips
+## 💌 Community & Support
 
-❗ Always use `pnpm run <script>` format for commands  
-✅ Run `pnpm run format` before committing code  
-🔧 Use `database:sync:dev` only in development environments
+[![Discord Banner](https://dcbadge.vercel.app/api/server/uuNbJQyw6g)](https://discord.gg/uuNbJQyw6g)
+
+Join 500+ developers in our Discord community to:
+- Get expert implementation support
+- Shape the product roadmap
+- Share testing strategies
+- Collaborate on integrations
+
+## 🤝 Contributing
+
+We actively welcome contributors! Please see our [Contribution Guidelines](https://github.com/pokemonlabs/iris/CONTRIBUTING.md) for:
+- Code style standards
+- Testing requirements
+- RFC process
+- Community expectations
+
+*(Guidelines coming next week - watch the repo!)*
 
 ---
 
-**Contribution Guidelines**: Coming soon!  
-**License**: [MIT](https://opensource.org/licenses/MIT)
+**License**: [MIT](https://opensource.org/licenses/MIT)  
+**Maintainer**: Pokemon Labs Team  
+**Code of Conduct**: [Contributor Covenant](https://www.contributor-covenant.org/)

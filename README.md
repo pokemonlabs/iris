@@ -68,6 +68,18 @@ pnpm run products:init   # Initialize Stripe integration
 pnpm run docker:init     # Start Docker services
 ```
 
+
+### Architecture
+```mermaid
+graph TD
+    A[User Request] -->|Request| B[Remix App]
+    B -->|Push Job| C[Redis Queue]
+    C -->|Process Job| D[Worker/Processor]
+    D -->|Send Update| B
+    B -->|Store Data| E[PostgreSQL Database]
+    F[External Service] -->|Job Updates| B
+```
+
 ## 🗺 Roadmap
 
 - [ ] Video test generation implementation

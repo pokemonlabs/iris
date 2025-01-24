@@ -5,7 +5,7 @@
 
 While AI-powered backend UI testing solutions have proliferated, developers face a critical challenge: most advanced testing agents are closed-source black boxes. Iris emerges as a transparent, community-driven solution - offering enterprise-grade testing capabilities with complete visibility and control.
 
-[![GitHub stars](https://img.shields.io/github/stars/iris-connect/iris?style=social)](https://github.com/iris-connect/iris) 
+[![GitHub stars](https://img.shields.io/github/stars/pokemonlabs/iris?style=social)](https://github.com/pokemonlabs/iris) 
 [![Discord](https://img.shields.io/badge/Discord-Join%20Chat-7289da?style=flat&logo=discord)](https://discord.gg/uuNbJQyw6g)
 ![License](https://img.shields.io/badge/License-MIT-green)
 

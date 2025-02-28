@@ -1,8 +1,7 @@
 import { parse } from "cookie";
+import Pusher from 'pusher';
 import { z } from 'zod';
 import { Trpc } from '~/core/trpc/base';
-import Pusher from 'pusher'
-import { zodResponseFormat } from "openai/helpers/zod.mjs";
 
 
 var pusher = new Pusher({
@@ -114,7 +113,7 @@ export const RabbitMQRouter = Trpc.createRouter({
     z.object({
       otp: z.number(),
     }),
-  )    .mutation(async ({ input, ctx }) => {
+  ).mutation(async ({ input, ctx }) => {
     // Get one message
     await pusher.trigger("channel", "otp-response", { otp: input.otp });
     return { success: true }

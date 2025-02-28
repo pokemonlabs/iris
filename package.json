@@ -57,6 +57,7 @@
     "dotenv": "^16.4.5",
     "express": "^4.21.0",
     "install": "^0.13.0",
+    "ioredis": "^5.5.0",
     "isbot": "^4.1.0",
     "jsonwebtoken": "8.5.1",
     "jsonwebtoken-esm": "1.0.5",
